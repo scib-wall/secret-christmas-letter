@@ -714,9 +714,9 @@
             </div>
             <div>
               <div class="flex items-center gap-2 text-xs text-goldLight font-bold">
-                <span>🦌</span> <span>🍬</span> <span>🛡️ Private Stockings</span>
+                <span>🦌</span> <span>🍬</span> <span>🛡️ Personal Account Vault</span>
               </div>
-              <h2 class="font-serif text-xl sm:text-2xl font-bold mt-0.5">Tap Your Name to Open</h2>
+              <h2 class="font-serif text-xl sm:text-2xl font-bold mt-0.5">Your Private Stocking</h2>
             </div>
           </div>
           <button onclick="lockVaultAgain()" class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/25 text-xs font-bold flex items-center gap-1.5 transition-all shrink-0">
@@ -724,52 +724,107 @@
           </button>
         </div>
 
-        <!-- Step 1: Select Your Name to Claim or Unlock With Personal PIN -->
-        <div class="bg-gradient-to-b from-white to-parchment/90 rounded-3xl p-5 sm:p-6 border border-gold/35 shadow-[0_10px_30px_rgba(46,30,26,0.05)] space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <h3 class="font-serif text-lg sm:text-xl font-bold text-pine flex items-center gap-2">
-              <span class="text-xl">🧦</span> <span>SCIENCE 4A Stockings</span>
-            </h3>
-            <div class="relative w-full sm:w-72">
-              <i data-lucide="search" class="w-4 h-4 text-cocoa/40 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-              <input 
-                type="text" 
-                id="vault-student-search" 
-                oninput="renderVaultDirectory()"
-                placeholder="Find your name..." 
-                class="w-full pl-10 pr-4 py-2 rounded-xl bg-white border border-gold/35 text-sm focus:outline-none focus:ring-2 focus:ring-pine/30"
-              />
+        <!-- Step 1: Personal Account Login / Claim (Only when not signed in) -->
+        <div id="account-auth-card" class="max-w-lg mx-auto bg-gradient-to-b from-white via-cream to-parchment rounded-3xl p-6 sm:p-8 border-2 border-gold/45 shadow-xl space-y-5">
+          <div class="text-center space-y-1.5">
+            <div class="w-14 h-14 mx-auto rounded-2xl evergreen-pill text-goldLight flex items-center justify-center text-2xl shadow-md border border-gold/60 animate-float">
+              🎅
             </div>
-          </div>
-
-          <!-- Class Directory Grid -->
-          <div id="vault-directory-grid" class="max-h-64 overflow-y-auto pr-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-
-        <!-- Step 2: Authenticated Owner's Private Mailbox Stage -->
-        <div id="mailbox-stage" class="bg-gradient-to-br from-parchment via-cream to-goldLight/25 rounded-3xl p-5 sm:p-7 border-2 border-gold/40 min-h-[300px] shadow-inner">
-          
-          <!-- Empty Prompt before authenticating a personal mailbox -->
-          <div id="mailbox-placeholder" class="text-center py-10 space-y-3">
-            <div class="flex items-center justify-center gap-4 text-4xl">
-              <span class="animate-prance">🦌</span>
-              <span class="animate-float">🎁</span>
-              <span class="animate-candy-wiggle">🍬</span>
-            </div>
-            <h4 class="font-serif text-xl sm:text-2xl font-bold text-pine">Your Private Stocking</h4>
-            <p class="text-xs sm:text-sm text-cocoa/70 max-w-sm mx-auto">
-              Tap your name above & enter your secret PIN to unwrap your letters.
+            <h3 class="font-serif text-2xl font-bold text-pine">Personal Stocking Account</h3>
+            <p class="text-xs text-cocoa/75">
+              Sign in or claim your classmate name permanently. Once claimed, only your personal password can open it.
             </p>
           </div>
 
+          <!-- Auth Mode Tabs -->
+          <div class="grid grid-cols-2 gap-1.5 p-1 rounded-2xl bg-parchment border border-gold/35">
+            <button type="button" id="auth-tab-login" onclick="switchAuthTab('login')" class="py-2 rounded-xl text-xs font-bold bg-pine text-goldLight shadow-xs transition-all">
+              🔑 Log In
+            </button>
+            <button type="button" id="auth-tab-register" onclick="switchAuthTab('register')" class="py-2 rounded-xl text-xs font-bold text-cocoa/75 hover:text-pine transition-all">
+              🆕 Claim My Name
+            </button>
+          </div>
+
+          <!-- LOGIN FORM (Existing Personal Account) -->
+          <form id="personal-login-form" onsubmit="handlePersonalLogin(event)" class="space-y-3.5">
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-cocoa/70 mb-1">Your Name in SCIENCE 4A</label>
+              <select id="login-student-select" required class="w-full px-3.5 py-3 rounded-2xl bg-white border border-gold/40 text-sm font-bold text-pine focus:outline-none focus:ring-2 focus:ring-pine/30">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-cocoa/70 mb-1">Personal Password</label>
+              <input
+                type="password"
+                id="login-password-input"
+                required
+                autocomplete="current-password"
+                placeholder="Enter your personal password..."
+                class="w-full px-4 py-3 rounded-2xl bg-white border border-gold/40 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-cranberry/30"
+              />
+            </div>
+
+            <p id="personal-login-error" class="hidden text-xs font-bold text-cranberry bg-red-50 py-2 px-3 rounded-xl border border-red-200 text-center"></p>
+
+            <button type="submit" id="personal-login-btn" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-cranberry to-berryDark hover:brightness-110 text-white font-bold text-sm shadow-lg shadow-cranberry/20 border border-gold/35 flex items-center justify-center gap-2 transition-all">
+              <span>🔔</span>
+              <span>Open My Personal Stocking</span>
+            </button>
+          </form>
+
+          <!-- REGISTER / PERMANENT CLAIM FORM (First-Time Owner) -->
+          <form id="personal-register-form" onsubmit="handlePersonalRegister(event)" class="hidden space-y-3.5">
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-cocoa/70 mb-1">Select Your Name (Unclaimed Only)</label>
+              <select id="register-student-select" required class="w-full px-3.5 py-3 rounded-2xl bg-white border border-gold/40 text-sm font-bold text-pine focus:outline-none focus:ring-2 focus:ring-pine/30">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-cocoa/70 mb-1">Create Personal Password (min 6 chars)</label>
+              <input
+                type="password"
+                id="register-password-input"
+                minlength="6"
+                required
+                autocomplete="new-password"
+                placeholder="Create a strong personal password..."
+                class="w-full px-4 py-3 rounded-2xl bg-white border border-gold/40 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-pine/30"
+              />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase tracking-wider text-cocoa/70 mb-1">Confirm Personal Password</label>
+              <input
+                type="password"
+                id="register-password-confirm"
+                minlength="6"
+                required
+                autocomplete="new-password"
+                placeholder="Re-enter your password..."
+                class="w-full px-4 py-3 rounded-2xl bg-white border border-gold/40 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-pine/30"
+              />
+            </div>
+
+            <p id="personal-register-error" class="hidden text-xs font-bold text-cranberry bg-red-50 py-2 px-3 rounded-xl border border-red-200 text-center"></p>
+
+            <button type="submit" id="personal-register-btn" class="w-full py-3.5 px-5 rounded-2xl evergreen-pill hover:brightness-110 text-white font-bold text-sm shadow-lg shadow-pine/25 border border-gold/45 flex items-center justify-center gap-2 transition-all">
+              <span>🎄</span>
+              <span>Register & Lock My Stocking</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Step 2: Authenticated Owner's Private Mailbox Stage -->
+        <div id="mailbox-stage" class="hidden bg-gradient-to-br from-parchment via-cream to-goldLight/25 rounded-3xl p-5 sm:p-7 border-2 border-gold/40 min-h-[300px] shadow-inner">
+          
           <!-- Active Authenticated Classmate's Letters Grid -->
-          <div id="mailbox-active-view" class="hidden space-y-5 animate-fade-up">
+          <div id="mailbox-active-view" class="space-y-5 animate-fade-up">
             <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
               <div>
                 <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-emerald-100 to-teal-50 text-pine border border-pine/20 text-[11px] font-bold uppercase tracking-wider mb-1">
-                  <span>🛡️</span> Verified Owner
+                  <span>🛡️</span> Personal Account Verified
                 </div>
                 <h3 id="active-mailbox-owner" class="font-serif text-2xl sm:text-3xl font-bold text-pine">Student Name</h3>
               </div>
@@ -784,7 +839,7 @@
                   ✨ Reveal All
                 </button>
                 <button onclick="exitOwnerMailbox()" class="px-3.5 py-2 rounded-2xl bg-gradient-to-r from-cranberry to-berryDark hover:brightness-110 text-white font-bold text-xs sm:text-sm shadow-sm flex items-center gap-1.5 transition-all">
-                  <i data-lucide="lock" class="w-3.5 h-3.5"></i> Lock & Exit
+                  <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Sign Out
                 </button>
               </div>
             </div>
@@ -801,94 +856,6 @@
     </section>
 
   </main>
-
-  <!-- ========================================================= -->
-  <!-- MODAL 0: OWNER MAILBOX CLAIM / PERSONAL PIN UNLOCK        -->
-  <!-- ========================================================= -->
-  <div id="owner-pin-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-cocoa/70 backdrop-blur-sm">
-    <div id="owner-pin-card" class="bg-gradient-to-b from-white via-cream to-parchment w-full max-w-md rounded-3xl p-6 sm:p-8 border-2 border-gold/50 shadow-2xl relative animate-pop space-y-5">
-      
-      <button onclick="closeOwnerPinModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white hover:bg-cranberry hover:text-white text-cocoa border border-gold/30 flex items-center justify-center shadow-sm transition-colors">
-        <i data-lucide="x" class="w-5 h-5"></i>
-      </button>
-
-      <!-- Header -->
-      <div class="text-center space-y-2 pt-1">
-        <div id="pin-modal-icon" class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-cranberry to-berryDark text-goldLight flex items-center justify-center text-3xl shadow-md border-2 border-goldLight animate-float">
-          🔑
-        </div>
-        <span id="pin-modal-badge" class="inline-block px-3 py-0.5 rounded-full bg-goldLight/70 text-pine border border-gold/40 text-[11px] font-bold uppercase tracking-wider">
-          Owner PIN
-        </span>
-        <h3 id="pin-modal-title" class="font-serif text-2xl font-bold text-pine">Student Name</h3>
-        <p id="pin-modal-subtitle" class="text-xs text-cocoa/75 leading-relaxed">
-          Enter your secret PIN.
-        </p>
-      </div>
-
-      <!-- MODE A: FIRST-TIME CLAIM (SET PERSONAL PIN) -->
-      <form id="claim-pin-form" onsubmit="handleClaimMailbox(event)" class="hidden space-y-4">
-        <div class="space-y-3">
-          <div>
-            <input 
-              type="password" 
-              id="claim-pin-input" 
-              minlength="4"
-              maxlength="8"
-              required
-              autocomplete="new-password"
-              placeholder="Create Secret PIN (4–8 chars)"
-              class="w-full text-center tracking-[0.22em] font-bold text-base py-3 px-4 rounded-2xl bg-white border-2 border-gold/40 focus:border-pine focus:outline-none placeholder:tracking-normal placeholder:font-normal placeholder:text-sm"
-            />
-          </div>
-          <div>
-            <input 
-              type="password" 
-              id="claim-pin-confirm" 
-              minlength="4"
-              maxlength="8"
-              required
-              autocomplete="new-password"
-              placeholder="Confirm Secret PIN"
-              class="w-full text-center tracking-[0.22em] font-bold text-base py-3 px-4 rounded-2xl bg-white border-2 border-gold/40 focus:border-pine focus:outline-none placeholder:tracking-normal placeholder:font-normal placeholder:text-sm"
-            />
-          </div>
-        </div>
-
-        <p id="claim-pin-error" class="hidden text-xs font-bold text-cranberry bg-red-50 py-2 px-3 rounded-xl border border-red-200 text-center"></p>
-
-        <button type="submit" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-pine to-pineLight hover:brightness-110 text-white font-bold text-sm shadow-lg shadow-pine/20 border border-gold/40 flex items-center justify-center gap-2 transition-all">
-          <span>🎄</span>
-          <span>Set PIN & Open</span>
-        </button>
-      </form>
-
-      <!-- MODE B: RETURNING OWNER UNLOCK -->
-      <form id="unlock-pin-form" onsubmit="handleVerifyOwnerPin(event)" class="hidden space-y-4">
-        <div>
-          <input 
-            type="password" 
-            id="verify-pin-input" 
-            maxlength="8"
-            required
-            autocomplete="current-password"
-            placeholder="Enter Secret PIN..."
-            class="w-full text-center tracking-[0.28em] font-bold text-xl py-3.5 px-4 rounded-2xl bg-white border-2 border-gold/40 focus:border-cranberry focus:outline-none placeholder:tracking-normal placeholder:font-normal placeholder:text-sm"
-          />
-        </div>
-
-        <p id="verify-pin-error" class="hidden text-xs font-bold text-cranberry bg-red-50 py-2 px-3 rounded-xl border border-red-200 text-center">
-          🚫 Wrong PIN!
-        </p>
-
-        <button type="submit" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-cranberry to-berryDark hover:brightness-110 text-white font-bold text-sm shadow-lg shadow-cranberry/20 border border-gold/30 flex items-center justify-center gap-2 transition-all">
-          <span>🔔</span>
-          <span>Unlock Stocking</span>
-        </button>
-      </form>
-
-    </div>
-  </div>
 
   <!-- ========================================================= -->
   <!-- MODAL 1: FULL-SCREEN DRAMATIC UNWRAPPING LETTER READER    -->
@@ -1018,22 +985,6 @@
             🎁 Fill Sample Letters (Test 52)
           </button>
         </div>
-
-        <!-- Organizer PIN Reset Safety Valve (Does NOT reveal letters) -->
-        <div class="pt-3 border-t border-gold/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div>
-            <h4 class="text-xs font-bold text-cranberry uppercase tracking-wider">Organizer PIN Reset (If Classmate Forgot PIN)</h4>
-            <p class="text-[11px] text-cocoa/70">Clears a classmate's PIN so they can reclaim their stocking—never shows their letters.</p>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <select id="reset-pin-select" class="px-2.5 py-2 rounded-xl bg-white border border-gold/35 text-xs font-semibold text-cocoa max-w-[165px]">
-              <!-- Populated by JS -->
-            </select>
-            <button type="button" onclick="resetStudentPin()" class="px-3 py-2 rounded-xl bg-cranberry hover:bg-berryDark text-white text-xs font-bold shrink-0">
-              Reset PIN
-            </button>
-          </div>
-        </div>
       </div>
 
       <div class="flex items-center justify-end gap-3 pt-2">
@@ -1051,16 +1002,23 @@
   <!-- Footer -->
   <footer class="py-6 text-center text-xs text-cocoa/65 relative z-10 space-y-1">
     <div class="text-sm tracking-[0.5em] opacity-75">🎄 🔔 🍬 ❄️ 🎁</div>
-    <div>Made with holiday cheer for <strong class="font-display text-pine">SCIENCE 4A</strong> Christmas Party • Owner-PIN Protected</div>
+    <div>Made with holiday cheer for <strong class="font-display text-pine">SCIENCE 4A</strong> Christmas Party • Personal Account Protected</div>
   </footer>
 
   <!-- ========================================================= -->
-  <!-- JAVASCRIPT: FIREBASE SYNC, SNOW, CONFETTI & APP LOGIC     -->
+  <!-- JAVASCRIPT: FIREBASE AUTH, FIRESTORE & APP LOGIC          -->
   <!-- ========================================================= -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, deleteDoc, addDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import {
+      getAuth,
+      signInAnonymously,
+      signInWithCustomToken,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, getDoc, addDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     // Live Firebase Configuration (secret-christmas-letter)
     const LIVE_FIREBASE_CONFIG = {
@@ -1089,6 +1047,7 @@
       claims: `${APP_ID}_claims`,
       opened: `${APP_ID}_opened_ids`,
       snow: `${APP_ID}_snow_enabled`,
+      activeOwner: `${APP_ID}_verified_owner`,
     };
 
     const state = {
@@ -1101,7 +1060,6 @@
       selectedSticker: '🎄',
       vaultUnlocked: false,
       verifiedOwner: null,
-      pendingPinStudent: null,
       activeReaderList: [],
       activeReaderIndex: 0,
       snowEnabled: true,
@@ -1152,9 +1110,16 @@
       }
     }
 
-    // Secure PIN Hashing (SHA-256 with fallback)
-    async function hashPin(studentName, rawPin) {
-      const normalized = `${APP_ID}::${studentName.trim().toLowerCase()}::${rawPin.trim()}`;
+    function studentSlug(name) {
+      return name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') || 'student';
+    }
+
+    function studentAccountEmail(name) {
+      return `${studentSlug(name)}@science4a.vault`;
+    }
+
+    async function hashPasswordFallback(studentName, rawPassword) {
+      const normalized = `${APP_ID}::${studentName.trim().toLowerCase()}::${rawPassword}`;
       if (window.crypto && window.crypto.subtle) {
         const encoder = new TextEncoder();
         const data = encoder.encode(normalized);
@@ -1171,10 +1136,6 @@
       return `fallback_${Math.abs(hash)}`;
     }
 
-    function studentDocId(name) {
-      return name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') || 'student';
-    }
-
     function escapeHtml(str) {
       return String(str || '')
         .replace(/&/g, '&amp;')
@@ -1184,7 +1145,7 @@
         .replace(/'/g, '&#39;');
     }
 
-    // Initialize Firebase Cloud Sync
+    // Initialize Firebase Auth & Firestore Cloud Sync
     async function initCloudStorage() {
       try {
         const firebaseConfig = (typeof __firebase_config !== 'undefined' && __firebase_config)
@@ -1195,10 +1156,24 @@
         auth = getAuth(app);
         db = getFirestore(app);
 
-        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-          await signInWithCustomToken(auth, __initial_auth_token);
-        } else {
-          await signInAnonymously(auth);
+        // Keep existing personal login session across page reloads if user is signed in
+        onAuthStateChanged(auth, async (user) => {
+          if (user && user.email && user.email.endsWith('@science4a.vault')) {
+            const slug = user.email.replace('@science4a.vault', '');
+            const matched = state.roster.find((n) => studentSlug(n) === slug);
+            if (matched) {
+              state.verifiedOwner = matched;
+              refreshAllViews();
+            }
+          }
+        });
+
+        if (!auth.currentUser) {
+          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+            await signInWithCustomToken(auth, __initial_auth_token);
+          } else {
+            await signInAnonymously(auth);
+          }
         }
 
         state.cloudReady = true;
@@ -1208,6 +1183,11 @@
         onSnapshot(rosterRef, (snap) => {
           if (snap.exists() && Array.isArray(snap.data().names) && snap.data().names.length > 0) {
             state.roster = snap.data().names;
+            if (auth.currentUser && auth.currentUser.email && auth.currentUser.email.endsWith('@science4a.vault')) {
+              const slug = auth.currentUser.email.replace('@science4a.vault', '');
+              const matched = state.roster.find((n) => studentSlug(n) === slug);
+              if (matched) state.verifiedOwner = matched;
+            }
             persistLocalState();
             refreshAllViews();
           }
@@ -1232,14 +1212,14 @@
           if (err.code === 'permission-denied') state.cloudReady = false;
         });
 
-        // Listen to owner PIN claims
+        // Listen to permanent personal account claims
         const claimsCol = collection(db, 'artifacts', APP_ID, 'public', 'data', 'claims');
         onSnapshot(claimsCol, (snapshot) => {
           const updatedClaims = {};
           snapshot.forEach((docSnap) => {
             const data = docSnap.data();
-            if (data && data.studentName && data.pinHash) {
-              updatedClaims[data.studentName] = data.pinHash;
+            if (data && data.studentName) {
+              updatedClaims[data.studentName] = data;
             }
           });
           state.claims = updatedClaims;
@@ -1275,7 +1255,7 @@
         toast.style.transform = 'translateY(8px)';
         toast.style.transition = 'all 0.35s ease';
         setTimeout(() => toast.remove(), 360);
-      }, 3200);
+      }, 3400);
     }
 
     // Mode Switching (Send vs Vault)
@@ -1286,7 +1266,6 @@
       const tabVault = document.getElementById('tab-vault');
 
       if (mode === 'send') {
-        exitOwnerMailbox(true);
         viewSend.classList.remove('hidden');
         viewVault.classList.add('hidden');
         tabSend.className = 'px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all bg-gradient-to-r from-cranberry to-berryDark text-white shadow-sm';
@@ -1296,7 +1275,7 @@
         viewVault.classList.remove('hidden');
         tabVault.className = 'px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all bg-gradient-to-r from-cranberry to-berryDark text-white shadow-sm';
         tabSend.className = 'px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-cocoa/75 hover:text-pine';
-        renderVaultDirectory();
+        renderVaultAccountState();
       }
     };
 
@@ -1434,7 +1413,7 @@
           if (codenameEl) codenameEl.value = '';
           updateCharCount();
           launchConfettiBurst(42);
-          showToast('Saved locally! Update Firestore Rules in Firebase Console to sync online.');
+          showToast('Saved locally! Check Firestore Rules to sync across devices.');
         } else {
           console.error('Error sending letter:', err);
           showToast('Could not send letter. Check your connection!', 'error');
@@ -1460,7 +1439,7 @@
         const tabIcon = document.getElementById('vault-tab-icon');
         if (tabIcon) tabIcon.textContent = '🔓';
         launchConfettiBurst(70);
-        renderVaultDirectory();
+        renderVaultAccountState();
         showToast('Welcome to the SCIENCE 4A Party Vault!');
       } else {
         if (errorEl) errorEl.classList.remove('hidden');
@@ -1473,7 +1452,6 @@
     };
 
     window.lockVaultAgain = function () {
-      exitOwnerMailbox(true);
       state.vaultUnlocked = false;
       const input = document.getElementById('vault-passkey-input');
       if (input) input.value = '';
@@ -1483,184 +1461,252 @@
       if (tabIcon) tabIcon.textContent = '🔒';
     };
 
-    // Render Stocking Directory inside Unlocked Vault
-    window.renderVaultDirectory = function () {
-      const grid = document.getElementById('vault-directory-grid');
-      const searchEl = document.getElementById('vault-student-search');
-      if (!grid) return;
+    // Switch between Personal Login and First-Time Permanent Registration
+    window.switchAuthTab = function (tab) {
+      const loginTab = document.getElementById('auth-tab-login');
+      const regTab = document.getElementById('auth-tab-register');
+      const loginForm = document.getElementById('personal-login-form');
+      const regForm = document.getElementById('personal-register-form');
 
-      const query = (searchEl ? searchEl.value : '').trim().toLowerCase();
-      const filtered = state.roster.filter((name) => name.toLowerCase().includes(query));
+      document.getElementById('personal-login-error').classList.add('hidden');
+      document.getElementById('personal-register-error').classList.add('hidden');
 
-      grid.innerHTML = filtered
-        .map((name, idx) => {
-          const count = state.letters.filter((l) => l.recipient === name).length;
-          const isClaimed = Boolean(state.claims[name]);
-          const isVerifiedOwner = state.verifiedOwner === name;
-
-          return `
-            <button
-              type="button"
-              onclick="handleSelectStockingOwner(${JSON.stringify(name).replace(/"/g, '&quot;')})"
-              style="animation-delay: ${Math.min(idx * 15, 250)}ms"
-              class="animate-fade-up p-3 rounded-2xl border text-left transition-all flex flex-col justify-between gap-2 ${
-                isVerifiedOwner
-                  ? 'evergreen-pill text-white border-gold shadow-lg scale-[1.02]'
-                  : 'bg-white hover:bg-goldLight/25 text-cocoa border-gold/35 shadow-xs'
-              }"
-            >
-              <div class="flex items-center justify-between gap-1">
-                <span class="text-lg">${isVerifiedOwner ? '🛡️' : isClaimed ? '🔒' : '🆕'}</span>
-                <span class="text-[11px] font-bold px-2 py-0.5 rounded-full ${
-                  isVerifiedOwner
-                    ? 'bg-goldLight text-pine'
-                    : 'bg-cranberry/10 text-cranberry'
-                }">
-                  ${count} 💌
-                </span>
-              </div>
-              <div class="font-bold text-xs sm:text-sm truncate">${escapeHtml(name)}</div>
-              <div class="text-[10px] font-semibold opacity-80">
-                ${isVerifiedOwner ? 'Open Now' : isClaimed ? 'PIN Locked' : 'Claim PIN'}
-              </div>
-            </button>
-          `;
-        })
-        .join('');
-    };
-
-    // Handle Clicking a Classmate's Stocking
-    window.handleSelectStockingOwner = function (name) {
-      if (state.verifiedOwner === name) {
-        renderOwnerMailbox();
-        return;
-      }
-
-      // Immediately isolate & hide any previously open owner's letters
-      exitOwnerMailbox(true);
-      state.pendingPinStudent = name;
-
-      const modal = document.getElementById('owner-pin-modal');
-      const titleEl = document.getElementById('pin-modal-title');
-      const subtitleEl = document.getElementById('pin-modal-subtitle');
-      const badgeEl = document.getElementById('pin-modal-badge');
-      const iconEl = document.getElementById('pin-modal-icon');
-      const claimForm = document.getElementById('claim-pin-form');
-      const unlockForm = document.getElementById('unlock-pin-form');
-
-      document.getElementById('claim-pin-error').classList.add('hidden');
-      document.getElementById('verify-pin-error').classList.add('hidden');
-      document.getElementById('claim-pin-input').value = '';
-      document.getElementById('claim-pin-confirm').value = '';
-      document.getElementById('verify-pin-input').value = '';
-
-      const isAlreadyClaimed = Boolean(state.claims[name]);
-      titleEl.textContent = name;
-
-      if (!isAlreadyClaimed) {
-        iconEl.textContent = '🆕';
-        badgeEl.textContent = 'First-Time Claim';
-        subtitleEl.textContent = 'Create a personal 4–8 character PIN so only you can open your letters.';
-        claimForm.classList.remove('hidden');
-        unlockForm.classList.add('hidden');
+      if (tab === 'login') {
+        loginTab.className = 'py-2 rounded-xl text-xs font-bold bg-pine text-goldLight shadow-xs transition-all';
+        regTab.className = 'py-2 rounded-xl text-xs font-bold text-cocoa/75 hover:text-pine transition-all';
+        loginForm.classList.remove('hidden');
+        regForm.classList.add('hidden');
       } else {
-        iconEl.textContent = '🔑';
-        badgeEl.textContent = 'Owner PIN Required';
-        subtitleEl.textContent = 'Enter your secret PIN to unlock your private stocking.';
-        claimForm.classList.add('hidden');
-        unlockForm.classList.remove('hidden');
+        regTab.className = 'py-2 rounded-xl text-xs font-bold bg-pine text-goldLight shadow-xs transition-all';
+        loginTab.className = 'py-2 rounded-xl text-xs font-bold text-cocoa/75 hover:text-pine transition-all';
+        regForm.classList.remove('hidden');
+        loginForm.classList.add('hidden');
+      }
+    };
+
+    // Render Personal Account Login Card vs Verified Private Stocking
+    window.renderVaultAccountState = function () {
+      const authCard = document.getElementById('account-auth-card');
+      const mailboxStage = document.getElementById('mailbox-stage');
+      const loginSelect = document.getElementById('login-student-select');
+      const registerSelect = document.getElementById('register-student-select');
+
+      if (!authCard || !mailboxStage) return;
+
+      // Populate dropdowns
+      const claimedNames = state.roster.filter((name) => Boolean(state.claims[name]));
+      const unclaimedNames = state.roster.filter((name) => !state.claims[name]);
+
+      if (loginSelect) {
+        loginSelect.innerHTML = claimedNames.length > 0
+          ? claimedNames.map((n) => `<option value="${escapeHtml(n)}">🔒 ${escapeHtml(n)}</option>`).join('')
+          : `<option value="" disabled selected>No claimed accounts yet — click "Claim My Name"</option>`;
       }
 
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
+      if (registerSelect) {
+        registerSelect.innerHTML = unclaimedNames.length > 0
+          ? unclaimedNames.map((n) => `<option value="${escapeHtml(n)}">🆕 ${escapeHtml(n)}</option>`).join('')
+          : `<option value="" disabled selected>All names have been claimed!</option>`;
+      }
+
+      // If no accounts claimed yet, default smoothly to Claim My Name tab
+      if (claimedNames.length === 0 && !state.verifiedOwner) {
+        switchAuthTab('register');
+      }
+
+      if (state.verifiedOwner) {
+        authCard.classList.add('hidden');
+        mailboxStage.classList.remove('hidden');
+        renderOwnerMailbox();
+      } else {
+        mailboxStage.classList.add('hidden');
+        authCard.classList.remove('hidden');
+        const grid = document.getElementById('envelopes-grid');
+        if (grid) grid.innerHTML = '';
+      }
     };
 
-    window.closeOwnerPinModal = function () {
-      const modal = document.getElementById('owner-pin-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      state.pendingPinStudent = null;
-    };
-
-    window.handleClaimMailbox = async function (event) {
+    // Register & Permanently Bind a Personal Stocking Account
+    window.handlePersonalRegister = async function (event) {
       event.preventDefault();
-      const studentName = state.pendingPinStudent;
-      if (!studentName) return;
+      const selectEl = document.getElementById('register-student-select');
+      const pass1El = document.getElementById('register-password-input');
+      const pass2El = document.getElementById('register-password-confirm');
+      const errEl = document.getElementById('personal-register-error');
+      const btnEl = document.getElementById('personal-register-btn');
 
-      const pin1 = document.getElementById('claim-pin-input').value.trim();
-      const pin2 = document.getElementById('claim-pin-confirm').value.trim();
-      const errEl = document.getElementById('claim-pin-error');
+      const studentName = selectEl ? selectEl.value : '';
+      const pass1 = pass1El ? pass1El.value : '';
+      const pass2 = pass2El ? pass2El.value : '';
 
-      if (pin1.length < 4) {
-        errEl.textContent = 'PIN must be at least 4 characters.';
+      errEl.classList.add('hidden');
+
+      if (!studentName) {
+        errEl.textContent = 'Select an unclaimed name from the list.';
         errEl.classList.remove('hidden');
         return;
       }
-      if (pin1 !== pin2) {
-        errEl.textContent = 'PINs do not match!';
+      if (state.claims[studentName]) {
+        errEl.textContent = 'This name is already claimed! Switch to Log In.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+      if (pass1.length < 6) {
+        errEl.textContent = 'Password must be at least 6 characters.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+      if (pass1 !== pass2) {
+        errEl.textContent = 'Passwords do not match!';
         errEl.classList.remove('hidden');
         return;
       }
 
-      const pinHash = await hashPin(studentName, pin1);
-      state.claims[studentName] = pinHash;
-      persistLocalState();
+      btnEl.disabled = true;
+      btnEl.textContent = 'Creating Personal Account...';
 
-      if (state.cloudReady && db) {
-        try {
-          const claimRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'claims', studentDocId(studentName));
-          await setDoc(claimRef, { studentName, pinHash, claimedAt: Date.now() });
-        } catch (err) {
-          console.warn('Cloud claim sync warning:', err);
+      try {
+        const email = studentAccountEmail(studentName);
+        let ownerUid = 'local_owner';
+
+        if (auth && db) {
+          // Double-check live Firestore before claiming so two people can never overwrite
+          const claimRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'claims', studentSlug(studentName));
+          const existingSnap = await getDoc(claimRef);
+          if (existingSnap.exists()) {
+            state.claims[studentName] = existingSnap.data();
+            persistLocalState();
+            renderVaultAccountState();
+            throw new Error('This name was already claimed! Please use Log In.');
+          }
+
+          try {
+            const cred = await createUserWithEmailAndPassword(auth, email, pass1);
+            ownerUid = cred.user.uid;
+          } catch (authErr) {
+            if (authErr.code === 'auth/email-already-in-use') {
+              throw new Error('This account already exists! Switch to Log In.');
+            }
+            if (authErr.code === 'auth/operation-not-allowed') {
+              // Fallback if Email/Password provider isn't toggled ON yet in Firebase Console
+              await signInAnonymously(auth);
+              ownerUid = auth.currentUser?.uid || 'anon_owner';
+            } else {
+              throw authErr;
+            }
+          }
+
+          const passHash = await hashPasswordFallback(studentName, pass1);
+          const claimRecord = {
+            studentName,
+            ownerUid,
+            passHash,
+            claimedAt: Date.now(),
+          };
+          await setDoc(claimRef, claimRecord);
+          state.claims[studentName] = claimRecord;
+        } else {
+          const passHash = await hashPasswordFallback(studentName, pass1);
+          state.claims[studentName] = { studentName, ownerUid, passHash, claimedAt: Date.now() };
         }
-      }
 
-      state.verifiedOwner = studentName;
-      closeOwnerPinModal();
-      launchConfettiBurst(55);
-      renderVaultDirectory();
-      renderOwnerMailbox();
-      showToast(`Stocking claimed & unlocked for ${studentName}!`);
-    };
-
-    window.handleVerifyOwnerPin = async function (event) {
-      event.preventDefault();
-      const studentName = state.pendingPinStudent;
-      if (!studentName) return;
-
-      const enteredPin = document.getElementById('verify-pin-input').value.trim();
-      const errEl = document.getElementById('verify-pin-error');
-      const cardEl = document.getElementById('owner-pin-card');
-
-      const enteredHash = await hashPin(studentName, enteredPin);
-      if (enteredHash && enteredHash === state.claims[studentName]) {
+        persistLocalState();
         state.verifiedOwner = studentName;
-        closeOwnerPinModal();
-        launchConfettiBurst(50);
-        renderVaultDirectory();
-        renderOwnerMailbox();
-        showToast(`Welcome back, ${studentName}!`);
-      } else {
+        pass1El.value = '';
+        pass2El.value = '';
+        launchConfettiBurst(60);
+        renderVaultAccountState();
+        showToast(`Personal stocking permanently claimed for ${studentName}!`);
+      } catch (err) {
+        errEl.textContent = err.message || 'Could not register account.';
         errEl.classList.remove('hidden');
-        cardEl.classList.remove('animate-shake');
-        void cardEl.offsetWidth;
-        cardEl.classList.add('animate-shake');
+      } finally {
+        btnEl.disabled = false;
+        btnEl.innerHTML = '<span>🎄</span><span>Register & Lock My Stocking</span>';
       }
     };
 
-    window.exitOwnerMailbox = function (silent = false) {
+    // Log Into an Existing Personal Stocking Account
+    window.handlePersonalLogin = async function (event) {
+      event.preventDefault();
+      const selectEl = document.getElementById('login-student-select');
+      const passEl = document.getElementById('login-password-input');
+      const errEl = document.getElementById('personal-login-error');
+      const btnEl = document.getElementById('personal-login-btn');
+
+      const studentName = selectEl ? selectEl.value : '';
+      const rawPassword = passEl ? passEl.value : '';
+
+      errEl.classList.add('hidden');
+
+      if (!studentName) {
+        errEl.textContent = 'Select your name first.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+
+      btnEl.disabled = true;
+      btnEl.textContent = 'Verifying Account...';
+
+      try {
+        const email = studentAccountEmail(studentName);
+        const claimData = state.claims[studentName];
+        let verified = false;
+
+        if (auth) {
+          try {
+            await signInWithEmailAndPassword(auth, email, rawPassword);
+            verified = true;
+          } catch (authErr) {
+            if (authErr.code === 'auth/wrong-password' || authErr.code === 'auth/invalid-credential') {
+              throw new Error('Incorrect personal password!');
+            }
+            // Check stored hash fallback if account was created before Email/Password provider was enabled
+            if (claimData && claimData.passHash) {
+              const checkHash = await hashPasswordFallback(studentName, rawPassword);
+              if (checkHash === claimData.passHash) {
+                verified = true;
+              }
+            }
+            if (!verified) {
+              throw new Error('Incorrect personal password!');
+            }
+          }
+        } else if (claimData && claimData.passHash) {
+          const checkHash = await hashPasswordFallback(studentName, rawPassword);
+          verified = checkHash === claimData.passHash;
+        }
+
+        if (!verified) {
+          throw new Error('Incorrect personal password!');
+        }
+
+        state.verifiedOwner = studentName;
+        passEl.value = '';
+        launchConfettiBurst(55);
+        renderVaultAccountState();
+        showToast(`Welcome back, ${studentName}!`);
+      } catch (err) {
+        errEl.textContent = err.message || 'Incorrect password!';
+        errEl.classList.remove('hidden');
+      } finally {
+        btnEl.disabled = false;
+        btnEl.innerHTML = '<span>🔔</span><span>Open My Personal Stocking</span>';
+      }
+    };
+
+    window.exitOwnerMailbox = async function (silent = false) {
       state.verifiedOwner = null;
       state.activeReaderList = [];
-      const placeholder = document.getElementById('mailbox-placeholder');
-      const activeView = document.getElementById('mailbox-active-view');
-      const grid = document.getElementById('envelopes-grid');
-
-      if (grid) grid.innerHTML = '';
-      if (activeView) activeView.classList.add('hidden');
-      if (placeholder) placeholder.classList.remove('hidden');
-
-      renderVaultDirectory();
-      if (!silent) showToast('Mailbox locked & cleared.');
+      if (auth) {
+        try {
+          await signInAnonymously(auth);
+        } catch (e) {
+          console.warn('Re-auth anonymous skipped:', e);
+        }
+      }
+      renderVaultAccountState();
+      if (!silent) showToast('Signed out of your personal stocking.');
     };
 
     // Render Only the Authenticated Owner's Envelopes
@@ -1668,8 +1714,6 @@
       const owner = state.verifiedOwner;
       if (!owner) return;
 
-      const placeholder = document.getElementById('mailbox-placeholder');
-      const activeView = document.getElementById('mailbox-active-view');
       const ownerEl = document.getElementById('active-mailbox-owner');
       const countEl = document.getElementById('active-mailbox-count');
       const grid = document.getElementById('envelopes-grid');
@@ -1677,8 +1721,6 @@
       const myLetters = state.letters.filter((l) => l.recipient === owner);
       state.activeReaderList = myLetters;
 
-      placeholder.classList.add('hidden');
-      activeView.classList.remove('hidden');
       ownerEl.textContent = owner;
       countEl.textContent = `${myLetters.length} ${myLetters.length === 1 ? 'Letter' : 'Letters'}`;
 
@@ -1783,7 +1825,6 @@
       const ribbonOverlay = document.getElementById('reader-ribbon-overlay');
       const bodyWrap = document.getElementById('reader-body-wrap');
 
-      // Clear any previous ribbon timers
       ribbonTimers.forEach((t) => clearTimeout(t));
       ribbonTimers = [];
 
@@ -1795,14 +1836,12 @@
       document.getElementById('reader-body').textContent = letter.message;
       document.getElementById('reader-sender').textContent = letter.sender || 'Secret Elf';
 
-      // Restart ink reveal animation cleanly
       if (bodyWrap) {
         bodyWrap.classList.remove('animate-ink-reveal');
         void bodyWrap.offsetWidth;
         bodyWrap.classList.add('animate-ink-reveal');
       }
 
-      // Reset & choreograph multi-stage ribbon unwrapping
       if (ribbonOverlay) {
         ribbonOverlay.classList.remove('hidden', 'ribbon-stage-untie', 'ribbon-stage-peel');
         if (playRibbonAnimation) {
@@ -1854,16 +1893,10 @@
     window.openRosterModal = function () {
       const modal = document.getElementById('roster-modal');
       const textarea = document.getElementById('roster-textarea');
-      const resetSelect = document.getElementById('reset-pin-select');
 
       if (textarea) {
         textarea.value = state.roster.join('\n');
         updateRosterLineCount();
-      }
-      if (resetSelect) {
-        resetSelect.innerHTML = state.roster
-          .map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}${state.claims[name] ? ' 🔒' : ''}</option>`)
-          .join('');
       }
 
       modal.classList.remove('hidden');
@@ -1918,31 +1951,6 @@
       closeRosterModal();
       refreshAllViews();
       showToast(`Saved ${names.length} SCIENCE 4A classmates!`);
-    };
-
-    window.resetStudentPin = async function () {
-      const select = document.getElementById('reset-pin-select');
-      const studentName = select ? select.value : '';
-      if (!studentName) return;
-
-      delete state.claims[studentName];
-      if (state.verifiedOwner === studentName) {
-        exitOwnerMailbox(true);
-      }
-      persistLocalState();
-
-      if (state.cloudReady && db) {
-        try {
-          const claimRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'claims', studentDocId(studentName));
-          await deleteDoc(claimRef);
-        } catch (err) {
-          console.warn('Cloud PIN reset warning:', err);
-        }
-      }
-
-      openRosterModal();
-      renderVaultDirectory();
-      showToast(`PIN cleared for ${studentName}. They can reclaim their stocking now.`);
     };
 
     window.generateSampleBatch = async function () {
@@ -2022,10 +2030,7 @@
 
       renderRecipientList();
       if (state.vaultUnlocked) {
-        renderVaultDirectory();
-        if (state.verifiedOwner) {
-          renderOwnerMailbox();
-        }
+        renderVaultAccountState();
       }
     }
 
