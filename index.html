@@ -1,0 +1,2148 @@
+<!-- ... existing code ... -->
+  <!-- Google Fonts: Elegant Holiday Display + Handwritten + Clean Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cinzel+Decorative:wght@700;900&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            serif: ['"Playfair Display"', 'serif'],
+            display: ['"Cinzel Decorative"', 'serif'],
+            hand: ['"Caveat"', 'cursive'],
+          },
+          colors: {
+            cream: '#FFFDF9',
+            parchment: '#FBF7F0',
+            cranberry: '#9E1B2B',
+            berryDark: '#73111E',
+            pine: '#133829',
+            pineLight: '#1F563F',
+            gold: '#C89B3C',
+            goldLight: '#F6E3B4',
+            cocoa: '#2E1E1A',
+          },
+          animation: {
+            'float': 'float 5.2s cubic-bezier(0.37, 0, 0.63, 1) infinite',
+            'bell-ring': 'bellRing 3s cubic-bezier(0.37, 0, 0.63, 1) infinite',
+            'prance': 'reindeerPrance 3.8s cubic-bezier(0.37, 0, 0.63, 1) infinite',
+            'candy-wiggle': 'candyWiggle 3.4s cubic-bezier(0.37, 0, 0.63, 1) infinite',
+            'twinkle': 'twinkle 2.4s ease-in-out infinite alternate',
+            'candy-flow': 'candyFlow 18s linear infinite',
+            'aurora': 'auroraShift 10s ease-in-out infinite alternate',
+            'fade-up': 'fadeSlideUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) both',
+            'shake': 'shake 0.5s cubic-bezier(.36,.07,.19,.97) both',
+            'pop': 'pop 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'glow': 'glow 3.5s ease-in-out infinite alternate',
+          },
+          keyframes: {
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-8px)' },
+            },
+            auroraShift: {
+              '0%': { backgroundPosition: '0% 50%' },
+              '50%': { backgroundPosition: '100% 50%' },
+              '100%': { backgroundPosition: '0% 50%' },
+            },
+            reindeerPrance: {
+              '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+              '25%': { transform: 'translateY(-7px) rotate(-6deg)' },
+              '50%': { transform: 'translateY(0px) rotate(0deg)' },
+              '75%': { transform: 'translateY(-5px) rotate(5deg)' },
+            },
+            candyWiggle: {
+              '0%, 100%': { transform: 'rotate(-8deg)' },
+              '50%': { transform: 'rotate(8deg)' },
+            },
+            bellRing: {
+              '0%, 100%': { transform: 'rotate(0deg)' },
+              '8%': { transform: 'rotate(14deg)' },
+              '16%': { transform: 'rotate(-12deg)' },
+              '24%': { transform: 'rotate(9deg)' },
+              '32%': { transform: 'rotate(-6deg)' },
+              '40%': { transform: 'rotate(0deg)' },
+            },
+            twinkle: {
+              '0%': { opacity: '0.45', transform: 'scale(0.88)' },
+              '100%': { opacity: '1', transform: 'scale(1.14)' },
+            },
+            candyFlow: {
+              '0%': { backgroundPosition: '0 0' },
+              '100%': { backgroundPosition: '96px 0' },
+            },
+            fadeSlideUp: {
+              '0%': { opacity: '0', transform: 'translateY(18px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            shake: {
+              '10%, 90%': { transform: 'translate3d(-2px, 0, 0)' },
+              '20%, 80%': { transform: 'translate3d(4px, 0, 0)' },
+              '30%, 50%, 70%': { transform: 'translate3d(-6px, 0, 0)' },
+              '40%, 60%': { transform: 'translate3d(6px, 0, 0)' },
+            },
+            pop: {
+              '0%': { transform: 'scale(0.9)', opacity: '0' },
+              '100%': { transform: 'scale(1)', opacity: '1' },
+            },
+            glow: {
+              '0%': { boxShadow: '0 10px 30px rgba(200, 155, 60, 0.18)' },
+              '100%': { boxShadow: '0 16px 46px rgba(200, 155, 60, 0.4)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #FFFDF9;
+      color: #2E1E1A;
+      background-image:
+        radial-gradient(circle at 12% 14%, rgba(200, 155, 60, 0.13) 0%, transparent 38%),
+        radial-gradient(circle at 88% 22%, rgba(158, 27, 43, 0.09) 0%, transparent 40%),
+        radial-gradient(circle at 50% 90%, rgba(19, 56, 41, 0.08) 0%, transparent 48%),
+        radial-gradient(#E5D7BF 0.95px, transparent 0.95px);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 26px 26px;
+      overflow-x: hidden;
+    }
+
+    /* Lively Animated Evergreen Gradients */
+    .evergreen-lively {
+      background: linear-gradient(135deg, #0D2B1E 0%, #164A35 32%, #246A4D 65%, #113827 100%);
+      background-size: 220% 220%;
+      animation: auroraShift 9s ease-in-out infinite alternate;
+    }
+    .evergreen-pill {
+      background: linear-gradient(125deg, #133829 0%, #1F5B42 50%, #2B7A58 100%);
+      background-size: 180% 180%;
+      animation: auroraShift 6s ease-in-out infinite alternate;
+    }
+
+    /* Soft Snowfall & Stardust Layer */
+    #snow-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 40;
+      transition: opacity 0.4s ease;
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FBF7F0;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D6C29F;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #9E1B2B;
+    }
+
+    /* Gradient Festive Stationery Themes */
+    .stationery-pine {
+      background: linear-gradient(145deg, #F3FAF6 0%, #FFFDF9 55%, #EAF4EE 100%);
+      border: 1.5px solid #133829;
+      box-shadow: inset 0 0 0 4px rgba(200, 155, 60, 0.16);
+    }
+    .stationery-cranberry {
+      background: linear-gradient(145deg, #FFF5F6 0%, #FFFDF9 55%, #FCECEE 100%);
+      border: 1.5px solid #9E1B2B;
+      box-shadow: inset 0 0 0 4px rgba(158, 27, 43, 0.09);
+    }
+    .stationery-gold {
+      background: linear-gradient(145deg, #FFFBF0 0%, #FFFDF9 55%, #FBF0D9 100%);
+      border: 1.5px solid #C89B3C;
+      box-shadow: inset 0 0 0 4px rgba(200, 155, 60, 0.18);
+    }
+    .stationery-peppermint {
+      background: linear-gradient(145deg, #FFF7F8 0%, #FFFDF9 50%, #F2F9F5 100%);
+      border: 1.5px dashed #9E1B2B;
+      box-shadow: inset 0 0 0 4px rgba(19, 56, 41, 0.08);
+    }
+
+    /* 3D Interactive Envelope Flap, Ribbon Thread & Dramatic Unwrapping */
+    .envelope-card {
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .envelope-flap-3d {
+      clip-path: polygon(0 0, 50% 64%, 100% 0);
+      transform-origin: top center;
+      transition: transform 1.15s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.6s ease;
+      backface-visibility: visible;
+    }
+    .envelope-card:hover .envelope-flap-3d {
+      transform: rotateX(34deg);
+    }
+    .envelope-card.is-unfolding .envelope-flap-3d {
+      transform: rotateX(180deg);
+    }
+
+    /* Silk Ribbon Thread Wrapping Across Envelope */
+    .ribbon-thread-v {
+      transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s ease;
+    }
+    .ribbon-thread-h {
+      transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.85s ease;
+    }
+    .envelope-card.is-unfolding .ribbon-thread-v {
+      transform: scaleY(0) translateY(-28px);
+      opacity: 0;
+    }
+    .envelope-card.is-unfolding .ribbon-thread-h {
+      transform: scaleX(0);
+      opacity: 0;
+    }
+    .envelope-card.is-unfolding .wax-seal-emblem {
+      transform: scale(1.7) rotate(32deg) translateY(-14px);
+      opacity: 0;
+    }
+    .envelope-letter-slip {
+      transition: transform 1.05s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .envelope-card.is-unfolding .envelope-letter-slip {
+      transform: translateY(-20px) scale(1.04);
+    }
+
+    /* Slow, Dramatic Full-Screen Letter Unwrap & Multi-Stage Ribbon Untie */
+    @keyframes parchmentUnfold {
+      0% {
+        opacity: 0;
+        transform: perspective(1600px) rotateX(-76deg) scale(0.78) translateY(52px);
+      }
+      45% {
+        opacity: 1;
+        transform: perspective(1600px) rotateX(8deg) scale(1.015) translateY(-6px);
+      }
+      75% {
+        opacity: 1;
+        transform: perspective(1600px) rotateX(-2deg) scale(0.998) translateY(1px);
+      }
+      100% {
+        opacity: 1;
+        transform: perspective(1600px) rotateX(0deg) scale(1) translateY(0);
+      }
+    }
+    .animate-parchment-unfold {
+      transform-origin: top center;
+      animation: parchmentUnfold 1.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Realistic Satin Bow & Ribbon Tails Untying & Gliding Away */
+    .reader-bow-loop-left {
+      transform-origin: right center;
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease;
+    }
+    .reader-bow-loop-right {
+      transform-origin: left center;
+      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.7s ease;
+    }
+    .reader-bow-tail-left {
+      transform-origin: top right;
+      transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s ease;
+    }
+    .reader-bow-tail-right {
+      transform-origin: top left;
+      transition: transform 0.95s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s ease;
+    }
+    .reader-bow-center {
+      transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.65s ease;
+    }
+
+    /* Stage 1: Bow Unties & Loosens */
+    .ribbon-stage-untie .reader-bow-loop-left {
+      transform: translateX(-26px) rotate(-32deg) scaleX(0.45);
+      opacity: 0.25;
+    }
+    .ribbon-stage-untie .reader-bow-loop-right {
+      transform: translateX(26px) rotate(32deg) scaleX(0.45);
+      opacity: 0.25;
+    }
+    .ribbon-stage-untie .reader-bow-tail-left {
+      transform: translate(-18px, 24px) rotate(28deg) scaleY(1.15);
+      opacity: 0.3;
+    }
+    .ribbon-stage-untie .reader-bow-tail-right {
+      transform: translate(18px, 24px) rotate(-28deg) scaleY(1.15);
+      opacity: 0.3;
+    }
+    .ribbon-stage-untie .reader-bow-center {
+      transform: scale(1.35) rotate(18deg);
+      opacity: 0;
+    }
+
+    /* Stage 2: Satin Strands Peel & Glide Off the Parchment */
+    .reader-ribbon-left {
+      transform-origin: left center;
+      transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.05s ease;
+    }
+    .reader-ribbon-right {
+      transform-origin: right center;
+      transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.05s ease;
+    }
+    .reader-ribbon-top {
+      transform-origin: top center;
+      transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.05s ease;
+    }
+    .reader-ribbon-bottom {
+      transform-origin: bottom center;
+      transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 1.05s ease;
+    }
+
+    .ribbon-stage-peel .reader-ribbon-left {
+      transform: translateX(-115%) scaleX(0.12) rotate(-6deg);
+      opacity: 0;
+    }
+    .ribbon-stage-peel .reader-ribbon-right {
+      transform: translateX(115%) scaleX(0.12) rotate(6deg);
+      opacity: 0;
+    }
+    .ribbon-stage-peel .reader-ribbon-top {
+      transform: translateY(-115%) scaleY(0.12) rotate(4deg);
+      opacity: 0;
+    }
+    .ribbon-stage-peel .reader-ribbon-bottom {
+      transform: translateY(115%) scaleY(0.12) rotate(-4deg);
+      opacity: 0;
+    }
+
+    @keyframes inkReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+        filter: blur(6px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+    .animate-ink-reveal {
+      animation: inkReveal 1.15s cubic-bezier(0.16, 1, 0.3, 1) 0.75s both;
+    }
+
+    /* Animated Candy-Cane Ribbon Banner */
+    .candy-stripe {
+      background: repeating-linear-gradient(
+        45deg,
+        #9E1B2B,
+        #9E1B2B 12px,
+        #FFFDF9 12px,
+        #FFFDF9 24px,
+        #133829 24px,
+        #133829 36px,
+        #FFFDF9 36px,
+        #FFFDF9 48px
+      );
+      background-size: 96px 96px;
+      animation: candyFlow 14s linear infinite;
+    }
+
+    /* Twinkling Fairy Light Bulbs */
+    .fairy-wire {
+      background-image: radial-gradient(ellipse at 50% 0%, transparent 62%, rgba(19, 56, 41, 0.28) 64%, transparent 67%);
+      background-size: 64px 16px;
+      background-repeat: repeat-x;
+    }
+    .fairy-bulb:nth-child(odd) {
+      animation: twinkle 1.9s ease-in-out infinite alternate;
+    }
+    .fairy-bulb:nth-child(even) {
+      animation: twinkle 2.3s ease-in-out infinite alternate-reverse;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-cranberry selection:text-white">
+
+  <!-- Gentle Falling Snow & Gold Stardust Canvas -->
+  <canvas id="snow-canvas"></canvas>
+
+  <!-- Confetti & Snowflake Burst Canvas -->
+  <canvas id="confetti-canvas" class="fixed inset-0 pointer-events-none z-50"></canvas>
+
+  <!-- Top Animated Candy-Cane Holiday Trim -->
+  <div class="h-2.5 w-full candy-stripe shadow-sm"></div>
+
+  <!-- Header & Navigation with Twinkling Fairy Lights -->
+  <header class="sticky top-0 z-30 bg-cream/92 backdrop-blur-md border-b border-gold/30 shadow-[0_4px_24px_rgba(46,30,26,0.04)]">
+    <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand / Elegant Holiday Title -->
+      <div class="flex items-center gap-3.5">
+        <div onclick="ringHeaderBell()" title="Ring the Christmas Bell!" class="cursor-pointer w-12 h-12 rounded-2xl bg-gradient-to-br from-pine to-pineLight text-goldLight flex items-center justify-center shadow-md shadow-pine/20 border border-gold/50 relative group">
+          <!-- Custom SVG Ornate Christmas Tree & Star -->
+          <svg class="w-7 h-7 transition-transform duration-300 group-hover:scale-110" viewBox="0 0 36 36" fill="none">
+            <path d="M18 3L19.7 6.5L23.5 7L20.7 9.7L21.4 13.5L18 11.7L14.6 13.5L15.3 9.7L12.5 7L16.3 6.5L18 3Z" fill="#F6E3B4"/>
+            <path d="M18 9L9 20H14L7 28H29L22 20H27L18 9Z" fill="#2D7A58" stroke="#F6E3B4" stroke-width="1.2" stroke-linejoin="round"/>
+            <rect x="15.5" y="28" width="5" height="5" rx="1" fill="#C89B3C"/>
+            <circle cx="15" cy="18" r="1.4" fill="#E11D48"/>
+            <circle cx="21" cy="23" r="1.5" fill="#FDE68A"/>
+            <circle cx="13" cy="25" r="1.4" fill="#E11D48"/>
+          </svg>
+          <span id="header-bell-badge" class="absolute -top-1.5 -right-1.5 text-sm animate-bell-ring select-none">🔔</span>
+        </div>
+
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <h1 class="font-display text-xl sm:text-2xl font-bold text-pine tracking-wide">SCIENCE 4A</h1>
+            <span class="px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-widest bg-gradient-to-r from-goldLight/80 to-amber-100 text-pine border border-gold/45 rounded-full flex items-center gap-1 shadow-xs">
+              <span class="animate-prance inline-block">🦌</span> <span id="header-roster-count">52</span>
+            </span>
+          </div>
+          <p class="text-xs text-cocoa/70 font-medium flex items-center gap-1.5">
+            <span>🎄 North Pole Secret Vault</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Main Mode Switcher, Snow Toggle & Roster Button -->
+      <div class="flex items-center gap-2 flex-wrap">
+        <div class="bg-gradient-to-r from-parchment to-goldLight/30 p-1 rounded-2xl border border-gold/35 flex items-center shadow-inner">
+          <button id="tab-send" onclick="switchMode('send')" class="px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all bg-gradient-to-r from-cranberry to-berryDark text-white shadow-sm">
+            <span>💌</span> Send
+          </button>
+          <button id="tab-vault" onclick="switchMode('vault')" class="px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-cocoa/75 hover:text-pine">
+            <span id="vault-tab-icon">🔒</span> Vault
+          </button>
+        </div>
+
+        <button id="snow-toggle-btn" onclick="toggleSnowfall()" title="Toggle Snow" class="p-2.5 rounded-2xl bg-gradient-to-b from-white to-parchment hover:from-goldLight/30 text-pine border border-gold/35 shadow-sm transition-all text-sm">
+          ❄️
+        </button>
+
+        <button onclick="openRosterModal()" title="Class List" class="p-2.5 px-3 rounded-2xl bg-gradient-to-b from-white to-parchment hover:from-goldLight/30 text-pine border border-gold/35 shadow-sm transition-all flex items-center gap-1.5 text-xs font-bold">
+          <span>🎄</span>
+          <span class="hidden md:inline">Roster</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Delicate Twinkling Fairy Lights Garland -->
+    <div class="w-full h-3.5 fairy-wire flex items-center justify-around px-6 overflow-hidden pointer-events-none select-none">
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-amber-300 shadow-[0_0_8px_#FCD34D]"></span>
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-cranberry shadow-[0_0_8px_#E11D48]"></span>
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10B981]"></span>
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-amber-300 shadow-[0_0_8px_#FCD34D]"></span>
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-cranberry shadow-[0_0_8px_#E11D48]"></span>
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-amber-300 shadow-[0_0_8px_#FCD34D] hidden sm:inline-block"></span>
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10B981] hidden sm:inline-block"></span>
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-cranberry shadow-[0_0_8px_#E11D48] hidden md:inline-block"></span>
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-amber-300 shadow-[0_0_8px_#FCD34D] hidden md:inline-block"></span>
+      <span class="fairy-bulb w-2 h-2.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10B981] hidden lg:inline-block"></span>
+    </div>
+  </header>
+
+  <!-- Toast Notification Banner (No alert() used!) -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full px-4 sm:px-0 pointer-events-none"></div>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 py-6 sm:py-8 relative z-10">
+
+    <!-- ========================================================= -->
+    <!-- MODE 1: PRE-PARTY SEND A LETTER                           -->
+    <!-- ========================================================= -->
+    <section id="view-send" class="space-y-6 animate-fade-up">
+      
+      <!-- Lush Gradient Evergreen & Gold Hero Card -->
+      <div class="evergreen-lively text-cream rounded-3xl p-6 sm:p-8 shadow-2xl shadow-pine/25 relative overflow-hidden border border-gold/55">
+        <!-- Soft Radiant Holiday Aura -->
+        <div class="pointer-events-none absolute -top-20 -left-20 w-64 h-64 rounded-full bg-emerald-400/15 blur-3xl"></div>
+        <div class="pointer-events-none absolute -bottom-24 right-10 w-72 h-72 rounded-full bg-amber-300/15 blur-3xl"></div>
+
+        <!-- Animated Festive Floating Icons -->
+        <div class="absolute right-6 bottom-3 text-6xl sm:text-7xl opacity-30 select-none pointer-events-none animate-float">🎄</div>
+        <div class="absolute right-28 top-3 text-4xl opacity-30 select-none pointer-events-none animate-prance">🦌</div>
+        <div class="absolute right-48 bottom-4 text-3xl opacity-30 select-none pointer-events-none animate-candy-wiggle">🍬</div>
+
+        <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
+          <div class="space-y-2 max-w-xl">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-gradient-to-r from-emerald-400/20 to-amber-300/20 border border-gold/40 text-goldLight text-xs font-semibold shadow-xs">
+              <span class="animate-bell-ring inline-block">🔔</span> <span>🦌</span> <span>🍬</span>
+            </div>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white leading-snug drop-shadow-xs">
+              Secret Christmas Letters
+            </h2>
+            <p class="text-sm text-emerald-100/95">
+              Pick a <strong class="text-goldLight">SCIENCE 4A</strong> classmate & seal your holiday wish inside the vault.
+            </p>
+          </div>
+
+          <div class="bg-gradient-to-br from-emerald-300/20 via-white/10 to-amber-300/15 backdrop-blur-md border border-gold/55 rounded-2xl px-6 py-4 text-center shrink-0 min-w-[145px] shadow-lg">
+            <div class="text-sm mb-0.5">🎁 🦌 🔔</div>
+            <div class="text-3xl sm:text-4xl font-display font-bold text-goldLight drop-shadow-xs" id="total-letters-badge">0</div>
+            <div class="text-[11px] uppercase tracking-widest text-emerald-100 font-semibold mt-0.5">Sealed</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cheerful Christmas Icon Ribbon Divider -->
+      <div class="flex items-center justify-center gap-4 text-lg select-none py-0.5">
+        <span class="h-px flex-1 bg-gradient-to-r from-transparent via-gold/45 to-gold/45"></span>
+        <span class="tracking-[0.45em] text-base sm:text-lg">🎄 🦌 🍬 🔔 🎁</span>
+        <span class="h-px flex-1 bg-gradient-to-l from-transparent via-gold/45 to-gold/45"></span>
+      </div>
+
+      <!-- Two-Column Letter Composer Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- LEFT COLUMN: Pick a Classmate (5 cols) -->
+        <div class="lg:col-span-5 bg-gradient-to-b from-white to-parchment/90 rounded-3xl p-5 sm:p-6 border border-gold/35 shadow-[0_10px_30px_rgba(46,30,26,0.05)] space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-serif text-lg sm:text-xl font-bold text-pine flex items-center gap-2">
+              <span class="text-xl animate-prance inline-block">🦌</span>
+              <span>Recipient</span>
+            </h3>
+            <button onclick="openRosterModal()" class="text-xs font-bold text-cranberry hover:underline flex items-center gap-1">
+              <span>✏️</span> List
+            </button>
+          </div>
+
+          <!-- Search Classmate Input -->
+          <div class="relative">
+            <i data-lucide="search" class="w-4 h-4 text-cocoa/40 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+            <input 
+              type="text" 
+              id="recipient-search" 
+              oninput="renderRecipientList()"
+              placeholder="Search classmate..." 
+              class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-gold/35 text-sm focus:outline-none focus:ring-2 focus:ring-cranberry/35 transition-all"
+            />
+          </div>
+
+          <!-- Scrollable Classmate Pills -->
+          <div id="recipient-list" class="max-h-[355px] overflow-y-auto pr-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Write & Seal Letter (7 cols) -->
+        <div class="lg:col-span-7 bg-gradient-to-b from-white to-parchment/90 rounded-3xl p-5 sm:p-6 border border-gold/35 shadow-[0_10px_30px_rgba(46,30,26,0.05)] space-y-5">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <h3 class="font-serif text-lg sm:text-xl font-bold text-pine flex items-center gap-2">
+              <span class="text-xl animate-candy-wiggle inline-block">🍬</span>
+              <span>Your Letter</span>
+            </h3>
+            <div id="selected-recipient-pill" class="px-3.5 py-1 rounded-full bg-gradient-to-r from-goldLight/80 to-amber-100 border border-gold/45 text-xs font-bold text-pine">
+              To: Pick someone 👈
+            </div>
+          </div>
+
+          <!-- Stationery & Wax Seal Picker -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Card Theme -->
+            <div>
+              <div class="grid grid-cols-2 gap-2" id="theme-selector">
+                <button type="button" onclick="selectTheme('pine')" data-theme="pine" class="theme-btn active p-2 rounded-xl border-2 border-pine bg-gradient-to-r from-emerald-50 to-white text-xs font-bold text-pine flex items-center gap-1.5 transition-all">
+                  <span>🎄</span> Pine
+                </button>
+                <button type="button" onclick="selectTheme('cranberry')" data-theme="cranberry" class="theme-btn p-2 rounded-xl border border-gold/30 bg-white text-xs font-semibold text-cocoa flex items-center gap-1.5 hover:bg-red-50 transition-all">
+                  <span>🔔</span> Berry
+                </button>
+                <button type="button" onclick="selectTheme('gold')" data-theme="gold" class="theme-btn p-2 rounded-xl border border-gold/30 bg-white text-xs font-semibold text-cocoa flex items-center gap-1.5 hover:bg-amber-50 transition-all">
+                  <span>✨</span> Gold
+                </button>
+                <button type="button" onclick="selectTheme('peppermint')" data-theme="peppermint" class="theme-btn p-2 rounded-xl border border-gold/30 bg-white text-xs font-semibold text-cocoa flex items-center gap-1.5 hover:bg-rose-50 transition-all">
+                  <span>🍬</span> Candy
+                </button>
+              </div>
+            </div>
+
+            <!-- Wax Seal / Sticker -->
+            <div class="flex items-center sm:justify-end">
+              <div class="flex items-center gap-1.5 flex-wrap" id="sticker-selector">
+                <button type="button" onclick="selectSticker('🎄')" data-sticker="🎄" class="sticker-btn w-9 h-9 rounded-2xl border-2 border-cranberry bg-red-50 text-lg flex items-center justify-center shadow-sm transition-transform scale-110">🎄</button>
+                <button type="button" onclick="selectSticker('🦌')" data-sticker="🦌" class="sticker-btn w-9 h-9 rounded-2xl border border-gold/30 bg-white text-lg flex items-center justify-center hover:scale-105 transition-transform">🦌</button>
+                <button type="button" onclick="selectSticker('🍬')" data-sticker="🍬" class="sticker-btn w-9 h-9 rounded-2xl border border-gold/30 bg-white text-lg flex items-center justify-center hover:scale-105 transition-transform">🍬</button>
+                <button type="button" onclick="selectSticker('🔔')" data-sticker="🔔" class="sticker-btn w-9 h-9 rounded-2xl border border-gold/30 bg-white text-lg flex items-center justify-center hover:scale-105 transition-transform">🔔</button>
+                <button type="button" onclick="selectSticker('🎅')" data-sticker="🎅" class="sticker-btn w-9 h-9 rounded-2xl border border-gold/30 bg-white text-lg flex items-center justify-center hover:scale-105 transition-transform">🎅</button>
+                <button type="button" onclick="selectSticker('❄️')" data-sticker="❄️" class="sticker-btn w-9 h-9 rounded-2xl border border-gold/30 bg-white text-lg flex items-center justify-center hover:scale-105 transition-transform">❄️</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Letter Paper Preview & Editor -->
+          <div id="letter-paper" class="stationery-pine rounded-2xl p-5 sm:p-6 shadow-inner transition-all relative">
+            <div class="flex items-center justify-between border-b border-gold/30 pb-3 mb-3">
+              <div class="font-hand text-2xl sm:text-3xl font-bold text-cranberry">
+                Dear <span id="paper-recipient-name" class="underline decoration-dotted">Classmate</span>,
+              </div>
+              <div id="paper-sticker-badge" class="w-11 h-11 rounded-full bg-gradient-to-br from-cranberry to-berryDark text-white flex items-center justify-center text-2xl shadow-md border-2 border-goldLight">
+                🎄
+              </div>
+            </div>
+
+            <textarea 
+              id="letter-message" 
+              rows="5" 
+              maxlength="1200"
+              placeholder="Write your Christmas wish..."
+              class="w-full bg-transparent resize-none focus:outline-none text-cocoa font-sans text-sm sm:text-base leading-relaxed placeholder:text-cocoa/40"
+            ></textarea>
+
+            <div class="pt-3 border-t border-gold/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <div class="flex items-center gap-2 flex-1">
+                <span class="font-hand text-xl font-bold text-pine shrink-0">From:</span>
+                <input 
+                  type="text" 
+                  id="letter-codename" 
+                  maxlength="40"
+                  placeholder="Secret Elf (optional)"
+                  class="w-full bg-white/85 px-3 py-1.5 rounded-xl border border-gold/30 text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-pine/30"
+                />
+              </div>
+              <span id="char-count" class="text-xs text-cocoa/50 font-medium self-end sm:self-center">0 / 1200</span>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <button 
+            id="send-letter-btn"
+            onclick="submitLetter()" 
+            class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-cranberry via-berryDark to-cranberry hover:brightness-110 text-white font-bold text-base shadow-lg shadow-cranberry/25 border border-gold/35 flex items-center justify-center gap-2.5 transition-all active:scale-[0.99] cursor-pointer"
+          >
+            <span>🎁</span>
+            <span>Seal & Send Letter</span>
+            <span>✨</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- MODE 2: CHRISTMAS PARTY VAULT (LOCKED -> UNLOCKED)        -->
+    <!-- ========================================================= -->
+    <section id="view-vault" class="hidden">
+
+      <!-- STATE A: CHRISTMAS WREATH & BELL LOCK SCREEN -->
+      <div id="vault-locked-screen" class="max-w-lg mx-auto my-6 sm:my-10 animate-fade-up">
+        <div id="lock-card" class="bg-gradient-to-b from-white via-cream to-parchment rounded-[2rem] p-7 sm:p-10 border-2 border-gold/50 shadow-2xl text-center relative overflow-hidden animate-glow">
+          
+          <!-- Animated Corner Icons -->
+          <div class="absolute top-4 left-5 text-2xl select-none animate-candy-wiggle">🍬</div>
+          <div class="absolute top-4 right-5 text-2xl select-none animate-bell-ring">🔔</div>
+          <div class="absolute bottom-4 left-5 text-2xl select-none animate-prance">🦌</div>
+          <div class="absolute bottom-4 right-5 text-2xl select-none animate-float">🎄</div>
+
+          <!-- Ornate Christmas Wreath + Golden Padlock Emblem -->
+          <div class="relative w-28 h-28 mx-auto mb-4 flex items-center justify-center animate-float">
+            <svg class="w-28 h-28 drop-shadow-md" viewBox="0 0 110 110" fill="none">
+              <circle cx="55" cy="55" r="42" stroke="#133829" stroke-width="13"/>
+              <circle cx="55" cy="55" r="42" stroke="#1F563F" stroke-width="7" stroke-dasharray="10 6"/>
+              <circle cx="55" cy="55" r="48" stroke="#C89B3C" stroke-width="1.2" stroke-dasharray="3 5"/>
+              <circle cx="24" cy="34" r="3.5" fill="#9E1B2B"/>
+              <circle cx="86" cy="34" r="3.5" fill="#9E1B2B"/>
+              <circle cx="22" cy="72" r="3.5" fill="#C89B3C"/>
+              <circle cx="88" cy="72" r="3.5" fill="#C89B3C"/>
+              <circle cx="55" cy="96" r="4" fill="#9E1B2B"/>
+              <path d="M55 15L41 6C38 11 39 17 44 19L55 15Z" fill="#9E1B2B" stroke="#F6E3B4" stroke-width="1"/>
+              <path d="M55 15L69 6C72 11 71 17 66 19L55 15Z" fill="#9E1B2B" stroke="#F6E3B4" stroke-width="1"/>
+              <circle cx="55" cy="15" r="4.5" fill="#C89B3C"/>
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cranberry to-berryDark text-goldLight flex items-center justify-center shadow-lg border-2 border-goldLight">
+                <i data-lucide="lock" class="w-6 h-6"></i>
+              </div>
+            </div>
+          </div>
+
+          <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-goldLight/80 to-amber-100 text-pine border border-gold/45 text-xs font-bold uppercase tracking-widest mb-2">
+            <span>🎄</span> <span id="locked-total-count" class="text-cranberry">0</span> Sealed
+          </span>
+          <h2 class="font-display text-2xl sm:text-3xl font-bold text-pine mb-4 tracking-wide">
+            North Pole Vault
+          </h2>
+
+          <!-- Passkey Input Form -->
+          <form onsubmit="handleUnlock(event)" class="space-y-4">
+            <div class="relative">
+              <input 
+                type="text" 
+                id="vault-passkey-input" 
+                autocomplete="off"
+                placeholder="Class Passkey..."
+                class="w-full text-center uppercase tracking-[0.22em] font-display font-bold text-lg py-3.5 px-4 rounded-2xl bg-white border-2 border-gold/45 focus:border-cranberry focus:outline-none focus:ring-4 focus:ring-cranberry/15 text-pine placeholder:font-sans placeholder:tracking-normal placeholder:font-normal placeholder:text-sm"
+              />
+            </div>
+
+            <p id="passkey-error" class="hidden text-xs font-bold text-cranberry bg-red-50 py-2 px-3 rounded-xl border border-red-200">
+              ❄️ Wrong passkey!
+            </p>
+
+            <button 
+              type="submit"
+              class="w-full py-4 px-6 rounded-2xl evergreen-pill hover:brightness-110 text-white font-bold text-base shadow-lg shadow-pine/30 border border-gold/50 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+            >
+              <span>🔔</span>
+              <span>Unlock Vault</span>
+              <span>✨</span>
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- STATE B: UNLOCKED PARTY MAILBOX EXPLORER (OWNER-ONLY PIN PROTECTED) -->
+      <div id="vault-unlocked-screen" class="hidden space-y-6 animate-pop">
+        
+        <!-- Unlocked Celebration Header -->
+        <div class="bg-gradient-to-r from-cranberry via-berryDark to-cranberry text-white rounded-3xl p-5 sm:p-6 shadow-lg flex flex-col sm:flex-row items-center justify-between gap-4 border border-gold/50">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-goldLight to-amber-200 text-pine flex items-center justify-center text-3xl shadow-md shrink-0 border border-gold animate-float">
+              🎄
+            </div>
+            <div>
+              <div class="flex items-center gap-2 text-xs text-goldLight font-bold">
+                <span>🦌</span> <span>🍬</span> <span>🛡️ Private Stockings</span>
+              </div>
+              <h2 class="font-serif text-xl sm:text-2xl font-bold mt-0.5">Tap Your Name to Open</h2>
+            </div>
+          </div>
+          <button onclick="lockVaultAgain()" class="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 border border-white/25 text-xs font-bold flex items-center gap-1.5 transition-all shrink-0">
+            <i data-lucide="lock" class="w-3.5 h-3.5"></i> Lock Gate
+          </button>
+        </div>
+
+        <!-- Step 1: Select Your Name to Claim or Unlock With Personal PIN -->
+        <div class="bg-gradient-to-b from-white to-parchment/90 rounded-3xl p-5 sm:p-6 border border-gold/35 shadow-[0_10px_30px_rgba(46,30,26,0.05)] space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <h3 class="font-serif text-lg sm:text-xl font-bold text-pine flex items-center gap-2">
+              <span class="text-xl">🧦</span> <span>SCIENCE 4A Stockings</span>
+            </h3>
+            <div class="relative w-full sm:w-72">
+              <i data-lucide="search" class="w-4 h-4 text-cocoa/40 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+              <input 
+                type="text" 
+                id="vault-student-search" 
+                oninput="renderVaultDirectory()"
+                placeholder="Find your name..." 
+                class="w-full pl-10 pr-4 py-2 rounded-xl bg-white border border-gold/35 text-sm focus:outline-none focus:ring-2 focus:ring-pine/30"
+              />
+            </div>
+          </div>
+
+          <!-- Class Directory Grid -->
+          <div id="vault-directory-grid" class="max-h-64 overflow-y-auto pr-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2.5">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Step 2: Authenticated Owner's Private Mailbox Stage -->
+        <div id="mailbox-stage" class="bg-gradient-to-br from-parchment via-cream to-goldLight/25 rounded-3xl p-5 sm:p-7 border-2 border-gold/40 min-h-[300px] shadow-inner">
+          
+          <!-- Empty Prompt before authenticating a personal mailbox -->
+          <div id="mailbox-placeholder" class="text-center py-10 space-y-3">
+            <div class="flex items-center justify-center gap-4 text-4xl">
+              <span class="animate-prance">🦌</span>
+              <span class="animate-float">🎁</span>
+              <span class="animate-candy-wiggle">🍬</span>
+            </div>
+            <h4 class="font-serif text-xl sm:text-2xl font-bold text-pine">Your Private Stocking</h4>
+            <p class="text-xs sm:text-sm text-cocoa/70 max-w-sm mx-auto">
+              Tap your name above & enter your secret PIN to unwrap your letters.
+            </p>
+          </div>
+
+          <!-- Active Authenticated Classmate's Letters Grid -->
+          <div id="mailbox-active-view" class="hidden space-y-5 animate-fade-up">
+            <div class="flex flex-wrap items-center justify-between gap-3 border-b border-gold/30 pb-4">
+              <div>
+                <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-gradient-to-r from-emerald-100 to-teal-50 text-pine border border-pine/20 text-[11px] font-bold uppercase tracking-wider mb-1">
+                  <span>🛡️</span> Verified Owner
+                </div>
+                <h3 id="active-mailbox-owner" class="font-serif text-2xl sm:text-3xl font-bold text-pine">Student Name</h3>
+              </div>
+              <div class="flex items-center gap-2 flex-wrap">
+                <span id="active-mailbox-count" class="px-3.5 py-2 rounded-2xl evergreen-pill text-goldLight border border-gold/50 font-bold text-xs sm:text-sm shadow-sm">
+                  0 Letters
+                </span>
+                <button onclick="unwrapNextEnvelope()" class="px-3.5 py-2 rounded-2xl bg-gradient-to-b from-white to-parchment hover:from-goldLight/40 text-pine border border-gold/45 font-bold text-xs sm:text-sm transition-all shadow-sm">
+                  💌 Unwrap Next
+                </button>
+                <button onclick="openAllEnvelopesForStudent()" class="px-3.5 py-2 rounded-2xl bg-gradient-to-r from-goldLight/80 to-amber-100 hover:brightness-105 text-pine border border-gold/50 font-bold text-xs sm:text-sm transition-all shadow-sm">
+                  ✨ Reveal All
+                </button>
+                <button onclick="exitOwnerMailbox()" class="px-3.5 py-2 rounded-2xl bg-gradient-to-r from-cranberry to-berryDark hover:brightness-110 text-white font-bold text-xs sm:text-sm shadow-sm flex items-center gap-1.5 transition-all">
+                  <i data-lucide="lock" class="w-3.5 h-3.5"></i> Lock & Exit
+                </button>
+              </div>
+            </div>
+
+            <!-- Grid of Envelopes (Only populated for verified owner) -->
+            <div id="envelopes-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- MODAL 0: OWNER MAILBOX CLAIM / PERSONAL PIN UNLOCK        -->
+  <!-- ========================================================= -->
+  <div id="owner-pin-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-cocoa/70 backdrop-blur-sm">
+    <div id="owner-pin-card" class="bg-gradient-to-b from-white via-cream to-parchment w-full max-w-md rounded-3xl p-6 sm:p-8 border-2 border-gold/50 shadow-2xl relative animate-pop space-y-5">
+      
+      <button onclick="closeOwnerPinModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white hover:bg-cranberry hover:text-white text-cocoa border border-gold/30 flex items-center justify-center shadow-sm transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <!-- Header -->
+      <div class="text-center space-y-2 pt-1">
+        <div id="pin-modal-icon" class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-cranberry to-berryDark text-goldLight flex items-center justify-center text-3xl shadow-md border-2 border-goldLight animate-float">
+          🔑
+        </div>
+        <span id="pin-modal-badge" class="inline-block px-3 py-0.5 rounded-full bg-goldLight/70 text-pine border border-gold/40 text-[11px] font-bold uppercase tracking-wider">
+          Owner PIN
+        </span>
+        <h3 id="pin-modal-title" class="font-serif text-2xl font-bold text-pine">Student Name</h3>
+        <p id="pin-modal-subtitle" class="text-xs text-cocoa/75 leading-relaxed">
+          Enter your secret PIN.
+        </p>
+      </div>
+
+      <!-- MODE A: FIRST-TIME CLAIM (SET PERSONAL PIN) -->
+      <form id="claim-pin-form" onsubmit="handleClaimMailbox(event)" class="hidden space-y-4">
+        <div class="space-y-3">
+          <div>
+            <input 
+              type="password" 
+              id="claim-pin-input" 
+              minlength="4"
+              maxlength="8"
+              required
+              autocomplete="new-password"
+              placeholder="Create Secret PIN (4–8 chars)"
+              class="w-full text-center tracking-[0.22em] font-bold text-base py-3 px-4 rounded-2xl bg-white border-2 border-gold/40 focus:border-pine focus:outline-none placeholder:tracking-normal placeholder:font-normal placeholder:text-sm"
+            />
+          </div>
+          <div>
+            <input 
+              type="password" 
+              id="claim-pin-confirm" 
+              minlength="4"
+              maxlength="8"
+              required
+              autocomplete="new-password"
+              placeholder="Confirm Secret PIN"
+              class="w-full text-center tracking-[0.22em] font-bold text-base py-3 px-4 rounded-2xl bg-white border-2 border-gold/40 focus:border-pine focus:outline-none placeholder:tracking-normal placeholder:font-normal placeholder:text-sm"
+            />
+          </div>
+        </div>
+
+        <p id="claim-pin-error" class="hidden text-xs font-bold text-cranberry bg-red-50 py-2 px-3 rounded-xl border border-red-200 text-center"></p>
+
+        <button type="submit" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-pine to-pineLight hover:brightness-110 text-white font-bold text-sm shadow-lg shadow-pine/20 border border-gold/40 flex items-center justify-center gap-2 transition-all">
+          <span>🎄</span>
+          <span>Set PIN & Open</span>
+        </button>
+      </form>
+
+      <!-- MODE B: RETURNING OWNER UNLOCK -->
+      <form id="unlock-pin-form" onsubmit="handleVerifyOwnerPin(event)" class="hidden space-y-4">
+        <div>
+          <input 
+            type="password" 
+            id="verify-pin-input" 
+            maxlength="8"
+            required
+            autocomplete="current-password"
+            placeholder="Enter Secret PIN..."
+            class="w-full text-center tracking-[0.28em] font-bold text-xl py-3.5 px-4 rounded-2xl bg-white border-2 border-gold/40 focus:border-cranberry focus:outline-none placeholder:tracking-normal placeholder:font-normal placeholder:text-sm"
+          />
+        </div>
+
+        <p id="verify-pin-error" class="hidden text-xs font-bold text-cranberry bg-red-50 py-2 px-3 rounded-xl border border-red-200 text-center">
+          🚫 Wrong PIN!
+        </p>
+
+        <button type="submit" class="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-cranberry to-berryDark hover:brightness-110 text-white font-bold text-sm shadow-lg shadow-cranberry/20 border border-gold/30 flex items-center justify-center gap-2 transition-all">
+          <span>🔔</span>
+          <span>Unlock Stocking</span>
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MODAL 1: FULL-SCREEN DRAMATIC UNWRAPPING LETTER READER    -->
+  <!-- ========================================================= -->
+  <div id="letter-reader-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-cocoa/75 backdrop-blur-md">
+    <div id="reader-card" class="w-full max-w-xl rounded-3xl p-6 sm:p-8 shadow-2xl relative stationery-pine max-h-[90vh] overflow-hidden flex flex-col">
+      
+      <!-- Realistic Satin Ribbon & Bow Unwrapping Overlay (Removed cleanly after unwrapping) -->
+      <div id="reader-ribbon-overlay" class="pointer-events-none absolute inset-0 z-30 flex items-center justify-center">
+        <!-- Vertical Satin Ribbon Strands -->
+        <div class="reader-ribbon-top absolute top-0 bottom-1/2 left-1/2 -translate-x-1/2 w-4 bg-gradient-to-r from-berryDark via-cranberry to-berryDark shadow-lg border-x border-goldLight/80">
+          <div class="w-0.5 h-full mx-auto bg-goldLight/60"></div>
+        </div>
+        <div class="reader-ribbon-bottom absolute top-1/2 bottom-0 left-1/2 -translate-x-1/2 w-4 bg-gradient-to-r from-berryDark via-cranberry to-berryDark shadow-lg border-x border-goldLight/80">
+          <div class="w-0.5 h-full mx-auto bg-goldLight/60"></div>
+        </div>
+        <!-- Horizontal Satin Ribbon Strands -->
+        <div class="reader-ribbon-left absolute left-0 right-1/2 top-1/2 -translate-y-1/2 h-4 bg-gradient-to-b from-berryDark via-cranberry to-berryDark shadow-lg border-y border-goldLight/80">
+          <div class="h-0.5 w-full my-auto bg-goldLight/60"></div>
+        </div>
+        <div class="reader-ribbon-right absolute left-1/2 right-0 top-1/2 -translate-y-1/2 h-4 bg-gradient-to-b from-berryDark via-cranberry to-berryDark shadow-lg border-y border-goldLight/80">
+          <div class="h-0.5 w-full my-auto bg-goldLight/60"></div>
+        </div>
+
+        <!-- Sculpted SVG Holiday Satin Bow Knot that Unties & Separates -->
+        <div class="relative z-10 w-36 h-36 flex items-center justify-center">
+          <svg class="w-full h-full overflow-visible drop-shadow-xl" viewBox="0 0 140 140" fill="none">
+            <!-- Left & Right Flowing Ribbon Tails -->
+            <path class="reader-bow-tail-left" d="M66 72 L34 114 L46 112 L52 122 L70 76 Z" fill="#881322" stroke="#F6E3B4" stroke-width="1.2"/>
+            <path class="reader-bow-tail-right" d="M74 72 L106 114 L94 112 L88 122 L70 76 Z" fill="#881322" stroke="#F6E3B4" stroke-width="1.2"/>
+            <!-- Left & Right Satin Bow Loops -->
+            <path class="reader-bow-loop-left" d="M68 70 C40 42, 14 54, 24 74 C32 90, 54 80, 68 70 Z" fill="#9E1B2B" stroke="#F6E3B4" stroke-width="1.5"/>
+            <path class="reader-bow-loop-right" d="M72 70 C100 42, 126 54, 116 74 C108 90, 86 80, 72 70 Z" fill="#9E1B2B" stroke="#F6E3B4" stroke-width="1.5"/>
+            <!-- Center Gold-Trimmed Velvet Knot -->
+            <rect class="reader-bow-center" x="61" y="61" width="18" height="18" rx="6" fill="#C89B3C" stroke="#FFFDF9" stroke-width="1.8"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Scrollable Letter Content -->
+      <div class="overflow-y-auto pr-1 space-y-4">
+        <!-- Top Bar -->
+        <div class="flex items-center justify-between border-b border-gold/35 pb-4">
+          <div class="flex items-center gap-3">
+            <div id="reader-sticker" class="w-12 h-12 rounded-full bg-gradient-to-br from-cranberry to-berryDark text-white text-2xl flex items-center justify-center shadow-md border-2 border-goldLight">
+              🎄
+            </div>
+            <div>
+              <span id="reader-letter-number" class="text-[11px] font-bold uppercase tracking-widest text-cocoa/60">Letter #1</span>
+              <h3 class="font-hand text-2xl sm:text-3xl font-bold text-cranberry leading-none">
+                Dear <span id="reader-recipient">Classmate</span>,
+              </h3>
+            </div>
+          </div>
+
+          <button onclick="closeLetterModal()" class="w-9 h-9 rounded-full bg-white/90 hover:bg-cranberry hover:text-white text-cocoa border border-gold/30 flex items-center justify-center transition-colors shadow-sm">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <!-- Letter Body with Graceful Ink Reveal -->
+        <div id="reader-body-wrap" class="py-3 min-h-[160px] animate-ink-reveal">
+          <p id="reader-body" class="text-cocoa text-base sm:text-lg leading-relaxed whitespace-pre-wrap font-sans"></p>
+        </div>
+
+        <!-- Footer Signature & Prev/Next Controls -->
+        <div class="pt-4 border-t border-gold/35 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-[11px] uppercase tracking-widest text-cocoa/55 block">From</span>
+            <span id="reader-sender" class="font-hand text-2xl font-bold text-pine">Secret Classmate</span>
+          </div>
+
+          <div class="flex items-center gap-2 self-end sm:self-center">
+            <button id="prev-letter-btn" onclick="navigateReader(-1)" class="px-3.5 py-2 rounded-xl bg-white hover:bg-parchment border border-gold/35 text-xs font-bold text-cocoa flex items-center gap-1 shadow-sm">
+              <i data-lucide="chevron-left" class="w-4 h-4"></i> Prev
+            </button>
+            <button id="next-letter-btn" onclick="navigateReader(1)" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-pine to-pineLight text-white text-xs font-bold flex items-center gap-1 shadow-sm">
+              Next <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MODAL 2: CLASS ROSTER & DEMO DATA MANAGER (51-53 PEOPLE)  -->
+  <!-- ========================================================= -->
+  <div id="roster-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-cocoa/65 backdrop-blur-sm">
+    <div class="bg-cream w-full max-w-2xl rounded-3xl p-6 sm:p-7 border-2 border-gold/50 shadow-2xl space-y-5 max-h-[90vh] overflow-y-auto animate-pop">
+      
+      <div class="flex items-center justify-between border-b border-gold/30 pb-3">
+        <div>
+          <h3 class="font-serif text-xl sm:text-2xl font-bold text-pine flex items-center gap-2">
+            <span>🎄</span> SCIENCE 4A Class Roster Setup
+          </h3>
+          <p class="text-xs text-cocoa/70">Paste all 51–53 classmate names (one per line) so everyone appears on the stocking wall.</p>
+        </div>
+        <button onclick="closeRosterModal()" class="w-9 h-9 rounded-full bg-white hover:bg-cranberry hover:text-white text-cocoa border border-gold/30 flex items-center justify-center shadow-sm">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="space-y-2">
+        <div class="flex items-center justify-between">
+          <label class="text-[11px] font-bold uppercase tracking-widest text-cocoa/70">Classmate Names (1 per line)</label>
+          <span id="roster-line-counter" class="text-xs font-bold text-pine bg-emerald-100 px-2.5 py-0.5 rounded-full">52 Names</span>
+        </div>
+        <textarea 
+          id="roster-textarea" 
+          rows="9"
+          oninput="updateRosterLineCount()"
+          placeholder="Paste your 51-53 classmates here, one name per line..."
+          class="w-full p-4 rounded-2xl bg-white border border-gold/35 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-pine/40 leading-relaxed"
+        ></textarea>
+      </div>
+
+      <!-- Handy Organizer Tools -->
+      <div class="bg-parchment border border-gold/40 rounded-2xl p-4 space-y-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h4 class="text-xs font-bold text-pine uppercase tracking-wider">Party Preview Helper</h4>
+            <p class="text-xs text-cocoa/75">Test what 52 sealed envelopes look like inside a classmate's private stocking.</p>
+          </div>
+          <button onclick="generateSampleBatch()" class="px-4 py-2.5 rounded-xl bg-gold hover:brightness-105 text-white text-xs font-bold shadow-sm shrink-0 transition-all">
+            🎁 Fill Sample Letters (Test 52)
+          </button>
+        </div>
+
+        <!-- Organizer PIN Reset Safety Valve (Does NOT reveal letters) -->
+        <div class="pt-3 border-t border-gold/30 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h4 class="text-xs font-bold text-cranberry uppercase tracking-wider">Organizer PIN Reset (If Classmate Forgot PIN)</h4>
+            <p class="text-[11px] text-cocoa/70">Clears a classmate's PIN so they can reclaim their stocking—never shows their letters.</p>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <select id="reset-pin-select" class="px-2.5 py-2 rounded-xl bg-white border border-gold/35 text-xs font-semibold text-cocoa max-w-[165px]">
+              <!-- Populated by JS -->
+            </select>
+            <button type="button" onclick="resetStudentPin()" class="px-3 py-2 rounded-xl bg-cranberry hover:bg-berryDark text-white text-xs font-bold shrink-0">
+              Reset PIN
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button onclick="closeRosterModal()" class="px-5 py-2.5 rounded-xl bg-white border border-gold/35 text-sm font-bold text-cocoa hover:bg-parchment">
+          Cancel
+        </button>
+        <button onclick="saveClassRoster()" class="px-6 py-2.5 rounded-xl bg-pine hover:bg-pineLight text-white text-sm font-bold shadow-md">
+          Save SCIENCE 4A Roster
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="py-6 text-center text-xs text-cocoa/65 relative z-10 space-y-1">
+    <div class="text-sm tracking-[0.5em] opacity-75">🎄 🔔 🍬 ❄️ 🎁</div>
+    <div>Made with holiday cheer for <strong class="font-display text-pine">SCIENCE 4A</strong> Christmas Party • Owner-PIN Protected</div>
+  </footer>
+
+  <!-- ========================================================= -->
+  <!-- JAVASCRIPT: FIREBASE SYNC, SNOW, CONFETTI & APP LOGIC     -->
+  <!-- ========================================================= -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, doc, setDoc, deleteDoc, addDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Live Firebase Configuration (secret-christmas-letter)
+    const LIVE_FIREBASE_CONFIG = {
+      apiKey: "AIzaSyAQzLs_-EH6Amqk9qsI7PYpr6ZyIO6vEIo",
+      authDomain: "secret-christmas-letter.firebaseapp.com",
+      projectId: "secret-christmas-letter",
+      storageBucket: "secret-christmas-letter.firebasestorage.app",
+      messagingSenderId: "295168779895",
+      appId: "1:295168779895:web:4bf2ee4ae3dde50c1d0872",
+      measurementId: "G-Z67NGM7QFS"
+    };
+
+    const APP_ID = (typeof __app_id !== 'undefined' && __app_id)
+      ? __app_id.replace(/[^a-zA-Z0-9_-]/g, '_')
+      : 'science-4a-christmas-vault';
+
+    const DEFAULT_ROSTER = Array.from({ length: 52 }, (_, idx) => {
+      const num = String(idx + 1).padStart(2, '0');
+      return `Classmate #${num}`;
+    });
+
+    const PARTY_PASSKEY = 'SCIENCE 4A';
+    const STORAGE_KEYS = {
+      roster: `${APP_ID}_roster`,
+      letters: `${APP_ID}_letters`,
+      claims: `${APP_ID}_claims`,
+      opened: `${APP_ID}_opened_ids`,
+      snow: `${APP_ID}_snow_enabled`,
+    };
+
+    const state = {
+      roster: [...DEFAULT_ROSTER],
+      letters: [],
+      claims: {},
+      openedIds: new Set(),
+      selectedRecipient: '',
+      selectedTheme: 'pine',
+      selectedSticker: '🎄',
+      vaultUnlocked: false,
+      verifiedOwner: null,
+      pendingPinStudent: null,
+      activeReaderList: [],
+      activeReaderIndex: 0,
+      snowEnabled: true,
+      cloudReady: false,
+    };
+
+    let db = null;
+    let auth = null;
+    let ribbonTimers = [];
+
+    // Safe localStorage helpers
+    function loadLocalState() {
+      try {
+        const savedRoster = JSON.parse(localStorage.getItem(STORAGE_KEYS.roster) || 'null');
+        if (Array.isArray(savedRoster) && savedRoster.length > 0) {
+          state.roster = savedRoster;
+        }
+        const savedLetters = JSON.parse(localStorage.getItem(STORAGE_KEYS.letters) || '[]');
+        if (Array.isArray(savedLetters)) {
+          state.letters = savedLetters;
+        }
+        const savedClaims = JSON.parse(localStorage.getItem(STORAGE_KEYS.claims) || '{}');
+        if (savedClaims && typeof savedClaims === 'object') {
+          state.claims = savedClaims;
+        }
+        const savedOpened = JSON.parse(localStorage.getItem(STORAGE_KEYS.opened) || '[]');
+        if (Array.isArray(savedOpened)) {
+          state.openedIds = new Set(savedOpened);
+        }
+        const savedSnow = localStorage.getItem(STORAGE_KEYS.snow);
+        if (savedSnow !== null) {
+          state.snowEnabled = savedSnow === 'true';
+        }
+      } catch (err) {
+        console.warn('Local cache read skipped:', err);
+      }
+    }
+
+    function persistLocalState() {
+      try {
+        localStorage.setItem(STORAGE_KEYS.roster, JSON.stringify(state.roster));
+        localStorage.setItem(STORAGE_KEYS.letters, JSON.stringify(state.letters));
+        localStorage.setItem(STORAGE_KEYS.claims, JSON.stringify(state.claims));
+        localStorage.setItem(STORAGE_KEYS.opened, JSON.stringify([...state.openedIds]));
+        localStorage.setItem(STORAGE_KEYS.snow, String(state.snowEnabled));
+      } catch (err) {
+        console.warn('Local cache write skipped:', err);
+      }
+    }
+
+    // Secure PIN Hashing (SHA-256 with fallback)
+    async function hashPin(studentName, rawPin) {
+      const normalized = `${APP_ID}::${studentName.trim().toLowerCase()}::${rawPin.trim()}`;
+      if (window.crypto && window.crypto.subtle) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(normalized);
+        const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(hashBuffer))
+          .map((b) => b.toString(16).padStart(2, '0'))
+          .join('');
+      }
+      let hash = 0;
+      for (let i = 0; i < normalized.length; i++) {
+        hash = (hash << 5) - hash + normalized.charCodeAt(i);
+        hash |= 0;
+      }
+      return `fallback_${Math.abs(hash)}`;
+    }
+
+    function studentDocId(name) {
+      return name.trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '') || 'student';
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    // Initialize Firebase Cloud Sync
+    async function initCloudStorage() {
+      try {
+        const firebaseConfig = (typeof __firebase_config !== 'undefined' && __firebase_config)
+          ? JSON.parse(__firebase_config)
+          : LIVE_FIREBASE_CONFIG;
+
+        const app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+
+        state.cloudReady = true;
+
+        // Listen to shared class roster
+        const rosterRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'meta', 'roster');
+        onSnapshot(rosterRef, (snap) => {
+          if (snap.exists() && Array.isArray(snap.data().names) && snap.data().names.length > 0) {
+            state.roster = snap.data().names;
+            persistLocalState();
+            refreshAllViews();
+          }
+        }, (err) => {
+          console.warn('Roster listener fallback:', err.message);
+          if (err.code === 'permission-denied') state.cloudReady = false;
+        });
+
+        // Listen to sealed letters
+        const lettersCol = collection(db, 'artifacts', APP_ID, 'public', 'data', 'letters');
+        onSnapshot(lettersCol, (snapshot) => {
+          const cloudLetters = [];
+          snapshot.forEach((docSnap) => {
+            cloudLetters.push({ id: docSnap.id, ...docSnap.data() });
+          });
+          cloudLetters.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+          state.letters = cloudLetters;
+          persistLocalState();
+          refreshAllViews();
+        }, (err) => {
+          console.warn('Letters listener fallback:', err.message);
+          if (err.code === 'permission-denied') state.cloudReady = false;
+        });
+
+        // Listen to owner PIN claims
+        const claimsCol = collection(db, 'artifacts', APP_ID, 'public', 'data', 'claims');
+        onSnapshot(claimsCol, (snapshot) => {
+          const updatedClaims = {};
+          snapshot.forEach((docSnap) => {
+            const data = docSnap.data();
+            if (data && data.studentName && data.pinHash) {
+              updatedClaims[data.studentName] = data.pinHash;
+            }
+          });
+          state.claims = updatedClaims;
+          persistLocalState();
+          refreshAllViews();
+        }, (err) => {
+          console.warn('Claims listener fallback:', err.message);
+          if (err.code === 'permission-denied') state.cloudReady = false;
+        });
+      } catch (err) {
+        console.warn('Running in offline/local fallback mode:', err);
+        state.cloudReady = false;
+      }
+    }
+
+    // Toast Notification Helper
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const toast = document.createElement('div');
+      const isError = type === 'error';
+      toast.className = `pointer-events-auto px-4 py-3 rounded-2xl shadow-xl border text-xs sm:text-sm font-bold flex items-center gap-2.5 animate-fade-up ${
+        isError
+          ? 'bg-cranberry text-white border-goldLight/50'
+          : 'bg-pine text-goldLight border-gold/60'
+      }`;
+      toast.innerHTML = `<span>${isError ? '❄️' : '🎄'}</span><span>${escapeHtml(message)}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        toast.style.transition = 'all 0.35s ease';
+        setTimeout(() => toast.remove(), 360);
+      }, 3200);
+    }
+
+    // Mode Switching (Send vs Vault)
+    window.switchMode = function (mode) {
+      const viewSend = document.getElementById('view-send');
+      const viewVault = document.getElementById('view-vault');
+      const tabSend = document.getElementById('tab-send');
+      const tabVault = document.getElementById('tab-vault');
+
+      if (mode === 'send') {
+        exitOwnerMailbox(true);
+        viewSend.classList.remove('hidden');
+        viewVault.classList.add('hidden');
+        tabSend.className = 'px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all bg-gradient-to-r from-cranberry to-berryDark text-white shadow-sm';
+        tabVault.className = 'px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-cocoa/75 hover:text-pine';
+      } else {
+        viewSend.classList.add('hidden');
+        viewVault.classList.remove('hidden');
+        tabVault.className = 'px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all bg-gradient-to-r from-cranberry to-berryDark text-white shadow-sm';
+        tabSend.className = 'px-3.5 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-bold flex items-center gap-1.5 transition-all text-cocoa/75 hover:text-pine';
+        renderVaultDirectory();
+      }
+    };
+
+    // Render Recipient List in Send View
+    window.renderRecipientList = function () {
+      const listEl = document.getElementById('recipient-list');
+      const searchInput = document.getElementById('recipient-search');
+      if (!listEl) return;
+
+      const query = (searchInput ? searchInput.value : '').trim().toLowerCase();
+      const filtered = state.roster.filter((name) => name.toLowerCase().includes(query));
+
+      if (filtered.length === 0) {
+        listEl.innerHTML = `<div class="col-span-full text-center py-8 text-xs text-cocoa/60">No classmate found 🦌</div>`;
+        return;
+      }
+
+      listEl.innerHTML = filtered
+        .map((name, index) => {
+          const isSelected = state.selectedRecipient === name;
+          const count = state.letters.filter((l) => l.recipient === name).length;
+          return `
+            <button
+              type="button"
+              onclick="selectRecipient(${JSON.stringify(name).replace(/"/g, '&quot;')})"
+              style="animation-delay: ${Math.min(index * 18, 280)}ms"
+              class="animate-fade-up w-full text-left px-3.5 py-2.5 rounded-2xl border transition-all flex items-center justify-between gap-2 ${
+                isSelected
+                  ? 'evergreen-pill text-white border-gold shadow-md scale-[1.01]'
+                  : 'bg-white hover:bg-goldLight/25 text-cocoa border-gold/30'
+              }"
+            >
+              <span class="text-xs sm:text-sm font-bold truncate flex items-center gap-2">
+                <span>${isSelected ? '🎄' : '🧦'}</span>
+                <span class="truncate">${escapeHtml(name)}</span>
+              </span>
+              <span class="text-[11px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
+                isSelected ? 'bg-goldLight text-pine' : 'bg-parchment text-cocoa/70 border border-gold/25'
+              }">
+                ${count} 💌
+              </span>
+            </button>
+          `;
+        })
+        .join('');
+    };
+
+    window.selectRecipient = function (name) {
+      state.selectedRecipient = name;
+      const pill = document.getElementById('selected-recipient-pill');
+      const paperName = document.getElementById('paper-recipient-name');
+      if (pill) pill.textContent = `To: ${name} 🎄`;
+      if (paperName) paperName.textContent = name;
+      renderRecipientList();
+    };
+
+    window.selectTheme = function (theme) {
+      state.selectedTheme = theme;
+      const paper = document.getElementById('letter-paper');
+      if (paper) {
+        paper.className = `stationery-${theme} rounded-2xl p-5 sm:p-6 shadow-inner transition-all relative`;
+      }
+      document.querySelectorAll('.theme-btn').forEach((btn) => {
+        const active = btn.dataset.theme === theme;
+        btn.className = active
+          ? 'theme-btn active p-2 rounded-xl border-2 border-pine bg-gradient-to-r from-emerald-50 to-white text-xs font-bold text-pine flex items-center gap-1.5 transition-all'
+          : 'theme-btn p-2 rounded-xl border border-gold/30 bg-white text-xs font-semibold text-cocoa flex items-center gap-1.5 hover:bg-amber-50/40 transition-all';
+      });
+    };
+
+    window.selectSticker = function (sticker) {
+      state.selectedSticker = sticker;
+      const badge = document.getElementById('paper-sticker-badge');
+      if (badge) badge.textContent = sticker;
+      document.querySelectorAll('.sticker-btn').forEach((btn) => {
+        const active = btn.dataset.sticker === sticker;
+        btn.className = active
+          ? 'sticker-btn w-9 h-9 rounded-2xl border-2 border-cranberry bg-red-50 text-lg flex items-center justify-center shadow-sm transition-transform scale-110'
+          : 'sticker-btn w-9 h-9 rounded-2xl border border-gold/30 bg-white text-lg flex items-center justify-center hover:scale-105 transition-transform';
+      });
+    };
+
+    // Submit & Seal Letter
+    window.submitLetter = async function () {
+      const msgEl = document.getElementById('letter-message');
+      const codenameEl = document.getElementById('letter-codename');
+      const sendBtn = document.getElementById('send-letter-btn');
+
+      if (!state.selectedRecipient) {
+        showToast('Pick a classmate first!', 'error');
+        return;
+      }
+
+      const message = (msgEl ? msgEl.value : '').trim();
+      if (!message) {
+        showToast('Write a holiday wish before sealing!', 'error');
+        return;
+      }
+
+      const sender = (codenameEl ? codenameEl.value : '').trim() || 'Secret Elf';
+      const payload = {
+        recipient: state.selectedRecipient,
+        message,
+        sender,
+        theme: state.selectedTheme,
+        sticker: state.selectedSticker,
+        createdAt: Date.now(),
+      };
+
+      if (sendBtn) sendBtn.disabled = true;
+
+      try {
+        if (state.cloudReady && db) {
+          const lettersCol = collection(db, 'artifacts', APP_ID, 'public', 'data', 'letters');
+          await addDoc(lettersCol, payload);
+        } else {
+          state.letters.push({ id: `local_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`, ...payload });
+          persistLocalState();
+          refreshAllViews();
+        }
+
+        if (msgEl) msgEl.value = '';
+        if (codenameEl) codenameEl.value = '';
+        updateCharCount();
+        launchConfettiBurst(42);
+        showToast(`Sealed & delivered to ${state.selectedRecipient}'s stocking!`);
+      } catch (err) {
+        if (err && err.code === 'permission-denied') {
+          state.cloudReady = false;
+          state.letters.push({ id: `local_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`, ...payload });
+          persistLocalState();
+          refreshAllViews();
+
+          if (msgEl) msgEl.value = '';
+          if (codenameEl) codenameEl.value = '';
+          updateCharCount();
+          launchConfettiBurst(42);
+          showToast('Saved locally! Update Firestore Rules in Firebase Console to sync online.');
+        } else {
+          console.error('Error sending letter:', err);
+          showToast('Could not send letter. Check your connection!', 'error');
+        }
+      } finally {
+        if (sendBtn) sendBtn.disabled = false;
+      }
+    };
+
+    // Party Gate Unlock (SCIENCE 4A)
+    window.handleUnlock = function (event) {
+      event.preventDefault();
+      const input = document.getElementById('vault-passkey-input');
+      const errorEl = document.getElementById('passkey-error');
+      const lockCard = document.getElementById('lock-card');
+
+      const entered = (input ? input.value : '').trim().toUpperCase().replace(/\s+/g, ' ');
+      if (entered === PARTY_PASSKEY) {
+        state.vaultUnlocked = true;
+        if (errorEl) errorEl.classList.add('hidden');
+        document.getElementById('vault-locked-screen').classList.add('hidden');
+        document.getElementById('vault-unlocked-screen').classList.remove('hidden');
+        const tabIcon = document.getElementById('vault-tab-icon');
+        if (tabIcon) tabIcon.textContent = '🔓';
+        launchConfettiBurst(70);
+        renderVaultDirectory();
+        showToast('Welcome to the SCIENCE 4A Party Vault!');
+      } else {
+        if (errorEl) errorEl.classList.remove('hidden');
+        if (lockCard) {
+          lockCard.classList.remove('animate-shake');
+          void lockCard.offsetWidth;
+          lockCard.classList.add('animate-shake');
+        }
+      }
+    };
+
+    window.lockVaultAgain = function () {
+      exitOwnerMailbox(true);
+      state.vaultUnlocked = false;
+      const input = document.getElementById('vault-passkey-input');
+      if (input) input.value = '';
+      document.getElementById('vault-unlocked-screen').classList.add('hidden');
+      document.getElementById('vault-locked-screen').classList.remove('hidden');
+      const tabIcon = document.getElementById('vault-tab-icon');
+      if (tabIcon) tabIcon.textContent = '🔒';
+    };
+
+    // Render Stocking Directory inside Unlocked Vault
+    window.renderVaultDirectory = function () {
+      const grid = document.getElementById('vault-directory-grid');
+      const searchEl = document.getElementById('vault-student-search');
+      if (!grid) return;
+
+      const query = (searchEl ? searchEl.value : '').trim().toLowerCase();
+      const filtered = state.roster.filter((name) => name.toLowerCase().includes(query));
+
+      grid.innerHTML = filtered
+        .map((name, idx) => {
+          const count = state.letters.filter((l) => l.recipient === name).length;
+          const isClaimed = Boolean(state.claims[name]);
+          const isVerifiedOwner = state.verifiedOwner === name;
+
+          return `
+            <button
+              type="button"
+              onclick="handleSelectStockingOwner(${JSON.stringify(name).replace(/"/g, '&quot;')})"
+              style="animation-delay: ${Math.min(idx * 15, 250)}ms"
+              class="animate-fade-up p-3 rounded-2xl border text-left transition-all flex flex-col justify-between gap-2 ${
+                isVerifiedOwner
+                  ? 'evergreen-pill text-white border-gold shadow-lg scale-[1.02]'
+                  : 'bg-white hover:bg-goldLight/25 text-cocoa border-gold/35 shadow-xs'
+              }"
+            >
+              <div class="flex items-center justify-between gap-1">
+                <span class="text-lg">${isVerifiedOwner ? '🛡️' : isClaimed ? '🔒' : '🆕'}</span>
+                <span class="text-[11px] font-bold px-2 py-0.5 rounded-full ${
+                  isVerifiedOwner
+                    ? 'bg-goldLight text-pine'
+                    : 'bg-cranberry/10 text-cranberry'
+                }">
+                  ${count} 💌
+                </span>
+              </div>
+              <div class="font-bold text-xs sm:text-sm truncate">${escapeHtml(name)}</div>
+              <div class="text-[10px] font-semibold opacity-80">
+                ${isVerifiedOwner ? 'Open Now' : isClaimed ? 'PIN Locked' : 'Claim PIN'}
+              </div>
+            </button>
+          `;
+        })
+        .join('');
+    };
+
+    // Handle Clicking a Classmate's Stocking
+    window.handleSelectStockingOwner = function (name) {
+      if (state.verifiedOwner === name) {
+        renderOwnerMailbox();
+        return;
+      }
+
+      // Immediately isolate & hide any previously open owner's letters
+      exitOwnerMailbox(true);
+      state.pendingPinStudent = name;
+
+      const modal = document.getElementById('owner-pin-modal');
+      const titleEl = document.getElementById('pin-modal-title');
+      const subtitleEl = document.getElementById('pin-modal-subtitle');
+      const badgeEl = document.getElementById('pin-modal-badge');
+      const iconEl = document.getElementById('pin-modal-icon');
+      const claimForm = document.getElementById('claim-pin-form');
+      const unlockForm = document.getElementById('unlock-pin-form');
+
+      document.getElementById('claim-pin-error').classList.add('hidden');
+      document.getElementById('verify-pin-error').classList.add('hidden');
+      document.getElementById('claim-pin-input').value = '';
+      document.getElementById('claim-pin-confirm').value = '';
+      document.getElementById('verify-pin-input').value = '';
+
+      const isAlreadyClaimed = Boolean(state.claims[name]);
+      titleEl.textContent = name;
+
+      if (!isAlreadyClaimed) {
+        iconEl.textContent = '🆕';
+        badgeEl.textContent = 'First-Time Claim';
+        subtitleEl.textContent = 'Create a personal 4–8 character PIN so only you can open your letters.';
+        claimForm.classList.remove('hidden');
+        unlockForm.classList.add('hidden');
+      } else {
+        iconEl.textContent = '🔑';
+        badgeEl.textContent = 'Owner PIN Required';
+        subtitleEl.textContent = 'Enter your secret PIN to unlock your private stocking.';
+        claimForm.classList.add('hidden');
+        unlockForm.classList.remove('hidden');
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    };
+
+    window.closeOwnerPinModal = function () {
+      const modal = document.getElementById('owner-pin-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      state.pendingPinStudent = null;
+    };
+
+    window.handleClaimMailbox = async function (event) {
+      event.preventDefault();
+      const studentName = state.pendingPinStudent;
+      if (!studentName) return;
+
+      const pin1 = document.getElementById('claim-pin-input').value.trim();
+      const pin2 = document.getElementById('claim-pin-confirm').value.trim();
+      const errEl = document.getElementById('claim-pin-error');
+
+      if (pin1.length < 4) {
+        errEl.textContent = 'PIN must be at least 4 characters.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+      if (pin1 !== pin2) {
+        errEl.textContent = 'PINs do not match!';
+        errEl.classList.remove('hidden');
+        return;
+      }
+
+      const pinHash = await hashPin(studentName, pin1);
+      state.claims[studentName] = pinHash;
+      persistLocalState();
+
+      if (state.cloudReady && db) {
+        try {
+          const claimRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'claims', studentDocId(studentName));
+          await setDoc(claimRef, { studentName, pinHash, claimedAt: Date.now() });
+        } catch (err) {
+          console.warn('Cloud claim sync warning:', err);
+        }
+      }
+
+      state.verifiedOwner = studentName;
+      closeOwnerPinModal();
+      launchConfettiBurst(55);
+      renderVaultDirectory();
+      renderOwnerMailbox();
+      showToast(`Stocking claimed & unlocked for ${studentName}!`);
+    };
+
+    window.handleVerifyOwnerPin = async function (event) {
+      event.preventDefault();
+      const studentName = state.pendingPinStudent;
+      if (!studentName) return;
+
+      const enteredPin = document.getElementById('verify-pin-input').value.trim();
+      const errEl = document.getElementById('verify-pin-error');
+      const cardEl = document.getElementById('owner-pin-card');
+
+      const enteredHash = await hashPin(studentName, enteredPin);
+      if (enteredHash && enteredHash === state.claims[studentName]) {
+        state.verifiedOwner = studentName;
+        closeOwnerPinModal();
+        launchConfettiBurst(50);
+        renderVaultDirectory();
+        renderOwnerMailbox();
+        showToast(`Welcome back, ${studentName}!`);
+      } else {
+        errEl.classList.remove('hidden');
+        cardEl.classList.remove('animate-shake');
+        void cardEl.offsetWidth;
+        cardEl.classList.add('animate-shake');
+      }
+    };
+
+    window.exitOwnerMailbox = function (silent = false) {
+      state.verifiedOwner = null;
+      state.activeReaderList = [];
+      const placeholder = document.getElementById('mailbox-placeholder');
+      const activeView = document.getElementById('mailbox-active-view');
+      const grid = document.getElementById('envelopes-grid');
+
+      if (grid) grid.innerHTML = '';
+      if (activeView) activeView.classList.add('hidden');
+      if (placeholder) placeholder.classList.remove('hidden');
+
+      renderVaultDirectory();
+      if (!silent) showToast('Mailbox locked & cleared.');
+    };
+
+    // Render Only the Authenticated Owner's Envelopes
+    function renderOwnerMailbox() {
+      const owner = state.verifiedOwner;
+      if (!owner) return;
+
+      const placeholder = document.getElementById('mailbox-placeholder');
+      const activeView = document.getElementById('mailbox-active-view');
+      const ownerEl = document.getElementById('active-mailbox-owner');
+      const countEl = document.getElementById('active-mailbox-count');
+      const grid = document.getElementById('envelopes-grid');
+
+      const myLetters = state.letters.filter((l) => l.recipient === owner);
+      state.activeReaderList = myLetters;
+
+      placeholder.classList.add('hidden');
+      activeView.classList.remove('hidden');
+      ownerEl.textContent = owner;
+      countEl.textContent = `${myLetters.length} ${myLetters.length === 1 ? 'Letter' : 'Letters'}`;
+
+      if (myLetters.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12 space-y-2">
+            <div class="text-4xl animate-float">🦌</div>
+            <p class="font-serif text-lg font-bold text-pine">No sealed letters in your stocking yet!</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = myLetters
+        .map((letter, idx) => {
+          const isOpened = state.openedIds.has(letter.id);
+          const themeClass = `stationery-${letter.theme || 'pine'}`;
+          return `
+            <div
+              id="envelope-card-${idx}"
+              onclick="openEnvelopeWithDrama(${idx})"
+              style="animation-delay: ${Math.min(idx * 25, 350)}ms"
+              class="envelope-card animate-fade-up cursor-pointer rounded-2xl p-4 ${themeClass} shadow-md hover:shadow-xl relative overflow-hidden min-h-[168px] flex flex-col justify-between select-none"
+            >
+              <!-- 3D Top Flap -->
+              <div class="envelope-flap-3d absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-goldLight/90 to-amber-100/70 border-b border-gold/40 z-10"></div>
+
+              <!-- Crisscross Silk Ribbon Threads (Visible when sealed) -->
+              ${
+                !isOpened
+                  ? `
+                <div class="ribbon-thread-v pointer-events-none absolute inset-y-0 left-1/2 -translate-x-1/2 w-2.5 bg-gradient-to-r from-berryDark via-cranberry to-berryDark border-x border-goldLight/80 z-20"></div>
+                <div class="ribbon-thread-h pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 h-2.5 bg-gradient-to-b from-berryDark via-cranberry to-berryDark border-y border-goldLight/80 z-20"></div>
+              `
+                  : ''
+              }
+
+              <!-- Wax Seal Emblem -->
+              <div class="relative z-20 flex items-center justify-between">
+                <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-white/90 text-pine border border-gold/35">
+                  #${idx + 1}
+                </span>
+                <div class="wax-seal-emblem w-10 h-10 rounded-full bg-gradient-to-br from-cranberry to-berryDark text-white text-xl flex items-center justify-center shadow-md border-2 border-goldLight transition-all duration-700">
+                  ${escapeHtml(letter.sticker || '🎄')}
+                </div>
+              </div>
+
+              <!-- Envelope Slip Preview -->
+              <div class="envelope-letter-slip relative z-10 mt-6 bg-white/85 backdrop-blur-xs rounded-xl p-3 border border-gold/30">
+                <div class="text-xs font-bold text-pine truncate">
+                  From: ${escapeHtml(letter.sender || 'Secret Elf')}
+                </div>
+                <div class="text-[11px] text-cocoa/70 mt-0.5 flex items-center justify-between">
+                  <span>${isOpened ? 'Opened ✨' : '🎀 Tap to Unwrap'}</span>
+                  <span>💌</span>
+                </div>
+              </div>
+            </div>
+          `;
+        })
+        .join('');
+    }
+
+    // Dramatic Envelope Flap Lift + Multi-Stage Satin Ribbon Unwrapping
+    window.openEnvelopeWithDrama = function (index) {
+      const cardEl = document.getElementById(`envelope-card-${index}`);
+      if (cardEl) {
+        cardEl.classList.add('is-unfolding');
+      }
+      setTimeout(() => {
+        openLetterReaderModal(index, true);
+        if (cardEl) cardEl.classList.remove('is-unfolding');
+      }, 680);
+    };
+
+    window.unwrapNextEnvelope = function () {
+      if (!state.activeReaderList.length) return;
+      const nextIdx = state.activeReaderList.findIndex((l) => !state.openedIds.has(l.id));
+      openEnvelopeWithDrama(nextIdx >= 0 ? nextIdx : 0);
+    };
+
+    window.openAllEnvelopesForStudent = function () {
+      if (!state.activeReaderList.length) return;
+      state.activeReaderList.forEach((l) => state.openedIds.add(l.id));
+      persistLocalState();
+      launchConfettiBurst(60);
+      renderOwnerMailbox();
+      showToast('All envelopes unwrapped!');
+    };
+
+    // Full-Screen Letter Reader with Slow, Graceful Ribbon Untying & Removal
+    function openLetterReaderModal(index, playRibbonAnimation = true) {
+      const letter = state.activeReaderList[index];
+      if (!letter) return;
+
+      state.activeReaderIndex = index;
+      state.openedIds.add(letter.id);
+      persistLocalState();
+
+      const modal = document.getElementById('letter-reader-modal');
+      const card = document.getElementById('reader-card');
+      const ribbonOverlay = document.getElementById('reader-ribbon-overlay');
+      const bodyWrap = document.getElementById('reader-body-wrap');
+
+      // Clear any previous ribbon timers
+      ribbonTimers.forEach((t) => clearTimeout(t));
+      ribbonTimers = [];
+
+      card.className = `w-full max-w-xl rounded-3xl p-6 sm:p-8 shadow-2xl relative stationery-${letter.theme || 'pine'} max-h-[90vh] overflow-hidden flex flex-col animate-parchment-unfold`;
+
+      document.getElementById('reader-sticker').textContent = letter.sticker || '🎄';
+      document.getElementById('reader-letter-number').textContent = `Letter #${index + 1} of ${state.activeReaderList.length}`;
+      document.getElementById('reader-recipient').textContent = letter.recipient;
+      document.getElementById('reader-body').textContent = letter.message;
+      document.getElementById('reader-sender').textContent = letter.sender || 'Secret Elf';
+
+      // Restart ink reveal animation cleanly
+      if (bodyWrap) {
+        bodyWrap.classList.remove('animate-ink-reveal');
+        void bodyWrap.offsetWidth;
+        bodyWrap.classList.add('animate-ink-reveal');
+      }
+
+      // Reset & choreograph multi-stage ribbon unwrapping
+      if (ribbonOverlay) {
+        ribbonOverlay.classList.remove('hidden', 'ribbon-stage-untie', 'ribbon-stage-peel');
+        if (playRibbonAnimation) {
+          ribbonTimers.push(
+            setTimeout(() => {
+              ribbonOverlay.classList.add('ribbon-stage-untie');
+            }, 350)
+          );
+          ribbonTimers.push(
+            setTimeout(() => {
+              ribbonOverlay.classList.add('ribbon-stage-peel');
+            }, 980)
+          );
+          ribbonTimers.push(
+            setTimeout(() => {
+              ribbonOverlay.classList.add('hidden');
+            }, 2200)
+          );
+        } else {
+          ribbonOverlay.classList.add('hidden');
+        }
+      }
+
+      document.getElementById('prev-letter-btn').disabled = index <= 0;
+      document.getElementById('next-letter-btn').disabled = index >= state.activeReaderList.length - 1;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      launchConfettiBurst(35);
+      renderOwnerMailbox();
+    }
+
+    window.navigateReader = function (delta) {
+      const target = state.activeReaderIndex + delta;
+      if (target >= 0 && target < state.activeReaderList.length) {
+        openLetterReaderModal(target, true);
+      }
+    };
+
+    window.closeLetterModal = function () {
+      ribbonTimers.forEach((t) => clearTimeout(t));
+      ribbonTimers = [];
+      const modal = document.getElementById('letter-reader-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    };
+
+    // Class Roster Modal & Organizer Tools
+    window.openRosterModal = function () {
+      const modal = document.getElementById('roster-modal');
+      const textarea = document.getElementById('roster-textarea');
+      const resetSelect = document.getElementById('reset-pin-select');
+
+      if (textarea) {
+        textarea.value = state.roster.join('\n');
+        updateRosterLineCount();
+      }
+      if (resetSelect) {
+        resetSelect.innerHTML = state.roster
+          .map((name) => `<option value="${escapeHtml(name)}">${escapeHtml(name)}${state.claims[name] ? ' 🔒' : ''}</option>`)
+          .join('');
+      }
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    };
+
+    window.closeRosterModal = function () {
+      const modal = document.getElementById('roster-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    };
+
+    window.updateRosterLineCount = function () {
+      const textarea = document.getElementById('roster-textarea');
+      const counter = document.getElementById('roster-line-counter');
+      if (!textarea || !counter) return;
+      const lines = textarea.value
+        .split('\n')
+        .map((s) => s.trim())
+        .filter(Boolean);
+      counter.textContent = `${lines.length} Names`;
+    };
+
+    window.saveClassRoster = async function () {
+      const textarea = document.getElementById('roster-textarea');
+      if (!textarea) return;
+
+      const names = [...new Set(
+        textarea.value
+          .split('\n')
+          .map((s) => s.trim())
+          .filter(Boolean)
+      )];
+
+      if (names.length === 0) {
+        showToast('Enter at least one classmate name!', 'error');
+        return;
+      }
+
+      state.roster = names;
+      persistLocalState();
+
+      if (state.cloudReady && db) {
+        try {
+          const rosterRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'meta', 'roster');
+          await setDoc(rosterRef, { names, updatedAt: Date.now() });
+        } catch (err) {
+          console.warn('Cloud roster sync warning:', err);
+        }
+      }
+
+      closeRosterModal();
+      refreshAllViews();
+      showToast(`Saved ${names.length} SCIENCE 4A classmates!`);
+    };
+
+    window.resetStudentPin = async function () {
+      const select = document.getElementById('reset-pin-select');
+      const studentName = select ? select.value : '';
+      if (!studentName) return;
+
+      delete state.claims[studentName];
+      if (state.verifiedOwner === studentName) {
+        exitOwnerMailbox(true);
+      }
+      persistLocalState();
+
+      if (state.cloudReady && db) {
+        try {
+          const claimRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'claims', studentDocId(studentName));
+          await deleteDoc(claimRef);
+        } catch (err) {
+          console.warn('Cloud PIN reset warning:', err);
+        }
+      }
+
+      openRosterModal();
+      renderVaultDirectory();
+      showToast(`PIN cleared for ${studentName}. They can reclaim their stocking now.`);
+    };
+
+    window.generateSampleBatch = async function () {
+      const targetStudent = state.roster[0] || 'Classmate #01';
+      const themes = ['pine', 'cranberry', 'gold', 'peppermint'];
+      const stickers = ['🎄', '🦌', '🍬', '🔔', '🎅', '❄️'];
+      const wishes = [
+        'Merry Christmas! Thank you for making SCIENCE 4A such a fun and memorable class this year!',
+        'Wishing you warmth, joy, and tons of holiday treats this Christmas break!',
+        'So grateful to have you as a classmate in SCIENCE 4A. Have the happiest holidays!',
+        'May your Christmas sparkle with laughter, good health, and great memories!',
+      ];
+
+      const batch = Array.from({ length: 52 }, (_, i) => ({
+        recipient: targetStudent,
+        message: wishes[i % wishes.length],
+        sender: `Secret Classmate #${i + 1}`,
+        theme: themes[i % themes.length],
+        sticker: stickers[i % stickers.length],
+        createdAt: Date.now() + i,
+      }));
+
+      if (state.cloudReady && db) {
+        const lettersCol = collection(db, 'artifacts', APP_ID, 'public', 'data', 'letters');
+        for (const item of batch) {
+          await addDoc(lettersCol, item);
+        }
+      } else {
+        batch.forEach((item, idx) => {
+          state.letters.push({ id: `sample_${Date.now()}_${idx}`, ...item });
+        });
+        persistLocalState();
+        refreshAllViews();
+      }
+
+      closeRosterModal();
+      launchConfettiBurst(65);
+      showToast(`Added 52 sample letters for ${targetStudent}!`);
+    };
+
+    // Festive Header Bell & Snow Toggle
+    window.ringHeaderBell = function () {
+      const badge = document.getElementById('header-bell-badge');
+      if (badge) {
+        badge.classList.remove('animate-bell-ring');
+        void badge.offsetWidth;
+        badge.classList.add('animate-bell-ring');
+      }
+      launchConfettiBurst(30);
+    };
+
+    window.toggleSnowfall = function () {
+      state.snowEnabled = !state.snowEnabled;
+      const snowCanvas = document.getElementById('snow-canvas');
+      if (snowCanvas) {
+        snowCanvas.style.opacity = state.snowEnabled ? '1' : '0';
+      }
+      persistLocalState();
+    };
+
+    function updateCharCount() {
+      const msgEl = document.getElementById('letter-message');
+      const countEl = document.getElementById('char-count');
+      if (msgEl && countEl) {
+        countEl.textContent = `${msgEl.value.length} / 1200`;
+      }
+    }
+
+    function refreshAllViews() {
+      const rosterBadge = document.getElementById('header-roster-count');
+      const totalBadge = document.getElementById('total-letters-badge');
+      const lockedBadge = document.getElementById('locked-total-count');
+
+      if (rosterBadge) rosterBadge.textContent = state.roster.length;
+      if (totalBadge) totalBadge.textContent = state.letters.length;
+      if (lockedBadge) lockedBadge.textContent = state.letters.length;
+
+      renderRecipientList();
+      if (state.vaultUnlocked) {
+        renderVaultDirectory();
+        if (state.verifiedOwner) {
+          renderOwnerMailbox();
+        }
+      }
+    }
+
+    // Gentle Falling Snow & Gold Stardust Animation
+    function initSnowCanvas() {
+      const canvas = document.getElementById('snow-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = (canvas.width = window.innerWidth);
+      let height = (canvas.height = window.innerHeight);
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
+
+      const flakes = Array.from({ length: 55 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        r: Math.random() * 2.6 + 1.1,
+        vy: Math.random() * 0.65 + 0.25,
+        vx: (Math.random() - 0.5) * 0.35,
+        isGold: Math.random() > 0.72,
+      }));
+
+      function drawSnow() {
+        ctx.clearRect(0, 0, width, height);
+        if (state.snowEnabled) {
+          for (const f of flakes) {
+            f.y += f.vy;
+            f.x += f.vx;
+            if (f.y > height) {
+              f.y = -6;
+              f.x = Math.random() * width;
+            }
+            if (f.x > width) f.x = 0;
+            if (f.x < 0) f.x = width;
+
+            ctx.beginPath();
+            ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+            ctx.fillStyle = f.isGold ? 'rgba(200, 155, 60, 0.45)' : 'rgba(255, 255, 255, 0.8)';
+            ctx.fill();
+          }
+        }
+        requestAnimationFrame(drawSnow);
+      }
+
+      canvas.style.opacity = state.snowEnabled ? '1' : '0';
+      drawSnow();
+    }
+
+    // Celebratory Confetti Burst
+    function launchConfettiBurst(count = 45) {
+      const canvas = document.getElementById('confetti-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const palette = ['#9E1B2B', '#133829', '#C89B3C', '#F6E3B4', '#246A4D'];
+      const particles = Array.from({ length: count }, () => ({
+        x: canvas.width * (0.25 + Math.random() * 0.5),
+        y: canvas.height * 0.45,
+        vx: (Math.random() - 0.5) * 11,
+        vy: -Math.random() * 10 - 3,
+        size: Math.random() * 7 + 4,
+        color: palette[Math.floor(Math.random() * palette.length)],
+        rot: Math.random() * Math.PI * 2,
+        vRot: (Math.random() - 0.5) * 0.2,
+        alpha: 1,
+      }));
+
+      function animateConfetti() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let alive = false;
+        for (const p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.28;
+          p.rot += p.vRot;
+          p.alpha -= 0.015;
+          if (p.alpha > 0) {
+            alive = true;
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.alpha);
+            ctx.translate(p.x, p.y);
+            ctx.rotate(p.rot);
+            ctx.fillStyle = p.color;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.65);
+            ctx.restore();
+          }
+        }
+        if (alive) {
+          requestAnimationFrame(animateConfetti);
+        } else {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      animateConfetti();
+    }
+
+    // Boot Application
+    window.addEventListener('DOMContentLoaded', () => {
+      loadLocalState();
+      refreshAllViews();
+      initSnowCanvas();
+
+      const msgEl = document.getElementById('letter-message');
+      if (msgEl) msgEl.addEventListener('input', updateCharCount);
+
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+
+      initCloudStorage();
+    });
+  </script>
+</body>
+</html>
