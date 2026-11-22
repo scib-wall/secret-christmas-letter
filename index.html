@@ -1,4 +1,11 @@
-<!-- ... existing code ... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#133829">
+  <meta name="description" content="SCIENCE 4A Christmas Party private letter vault">
+  <title>SCIENCE 4A Party Vault</title>
   <!-- Google Fonts: Elegant Holiday Display + Handwritten + Clean Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -371,6 +378,32 @@
     .fairy-bulb:nth-child(even) {
       animation: twinkle 2.3s ease-in-out infinite alternate-reverse;
     }
+  
+    /* Enhanced satin ribbon: layered highlights, 3D curl and spring-like release */
+    .reader-ribbon-top, .reader-ribbon-bottom, .reader-ribbon-left, .reader-ribbon-right {
+      transform-style: preserve-3d;
+      will-change: transform, opacity, filter;
+      box-shadow: inset 2px 0 3px rgba(255,255,255,.28), inset -2px 0 4px rgba(0,0,0,.22), 0 5px 12px rgba(46,30,26,.18);
+    }
+    .reader-ribbon-top, .reader-ribbon-bottom {
+      background-image: linear-gradient(90deg, rgba(255,255,255,.28), transparent 22%, rgba(0,0,0,.16) 52%, rgba(255,255,255,.18));
+      transform-origin: center;
+    }
+    .reader-ribbon-left, .reader-ribbon-right {
+      background-image: linear-gradient(180deg, rgba(255,255,255,.26), transparent 24%, rgba(0,0,0,.17) 55%, rgba(255,255,255,.16));
+      transform-origin: center;
+    }
+    .ribbon-stage-untie .reader-ribbon-top { animation: ribbonLiftTop 1.05s cubic-bezier(.2,.85,.25,1) forwards; }
+    .ribbon-stage-untie .reader-ribbon-bottom { animation: ribbonLiftBottom 1.05s cubic-bezier(.2,.85,.25,1) forwards; }
+    .ribbon-stage-peel .reader-ribbon-left { animation: ribbonCurlLeft 1.15s cubic-bezier(.16,1,.3,1) forwards; }
+    .ribbon-stage-peel .reader-ribbon-right { animation: ribbonCurlRight 1.15s cubic-bezier(.16,1,.3,1) forwards; }
+    @keyframes ribbonLiftTop { 0% { transform: translateY(0) rotateX(0) scaleY(1); opacity:1 } 45% { transform: translateY(-13px) rotateX(48deg) scaleY(.9); } 100% { transform: translateY(-125%) rotateX(82deg) scaleY(.55); opacity:0 } }
+    @keyframes ribbonLiftBottom { 0% { transform: translateY(0) rotateX(0) scaleY(1); opacity:1 } 45% { transform: translateY(13px) rotateX(-48deg) scaleY(.9); } 100% { transform: translateY(125%) rotateX(-82deg) scaleY(.55); opacity:0 } }
+    @keyframes ribbonCurlLeft { 0% { transform: translateX(0) rotateY(0) skewY(0); opacity:1 } 35% { transform: translateX(-16px) rotateY(-35deg) skewY(-8deg); } 100% { transform: translateX(-125%) rotateY(-78deg) skewY(-14deg); opacity:0 } }
+    @keyframes ribbonCurlRight { 0% { transform: translateX(0) rotateY(0) skewY(0); opacity:1 } 35% { transform: translateX(16px) rotateY(35deg) skewY(8deg); } 100% { transform: translateX(125%) rotateY(78deg) skewY(14deg); opacity:0 } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-cranberry selection:text-white">
@@ -616,6 +649,8 @@
             </div>
           </div>
 
+          <p class="text-xs text-cocoa/65 text-center">🔐 Sign in to your personal class account before sending. One letter per recipient is allowed.</p>
+
           <!-- Submit Button -->
           <button 
             id="send-letter-btn"
@@ -758,7 +793,7 @@
               <label class="block text-[11px] font-bold uppercase tracking-wider text-cocoa/70 mb-1">Personal Password</label>
               <input
                 type="password"
-                id="login-password-input"
+                id="login-password-input" autocomplete="current-password"
                 required
                 autocomplete="current-password"
                 placeholder="Enter your personal password..."
@@ -786,7 +821,7 @@
               <label class="block text-[11px] font-bold uppercase tracking-wider text-cocoa/70 mb-1">Create Personal Password (min 6 chars)</label>
               <input
                 type="password"
-                id="register-password-input"
+                id="register-password-input" autocomplete="new-password"
                 minlength="6"
                 required
                 autocomplete="new-password"
@@ -798,7 +833,7 @@
               <label class="block text-[11px] font-bold uppercase tracking-wider text-cocoa/70 mb-1">Confirm Personal Password</label>
               <input
                 type="password"
-                id="register-password-confirm"
+                id="register-password-confirm" autocomplete="new-password"
                 minlength="6"
                 required
                 autocomplete="new-password"
@@ -981,9 +1016,7 @@
             <h4 class="text-xs font-bold text-pine uppercase tracking-wider">Party Preview Helper</h4>
             <p class="text-xs text-cocoa/75">Test what 52 sealed envelopes look like inside a classmate's private stocking.</p>
           </div>
-          <button onclick="generateSampleBatch()" class="px-4 py-2.5 rounded-xl bg-gold hover:brightness-105 text-white text-xs font-bold shadow-sm shrink-0 transition-all">
-            🎁 Fill Sample Letters (Test 52)
-          </button>
+          <span class="text-xs font-semibold text-cocoa/70 bg-parchment border border-gold/30 rounded-xl px-3 py-2">Demo injection disabled in secure mode</span>
         </div>
       </div>
 
@@ -1012,13 +1045,14 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import {
       getAuth,
-      signInAnonymously,
-      signInWithCustomToken,
       createUserWithEmailAndPassword,
       signInWithEmailAndPassword,
-      onAuthStateChanged
+      onAuthStateChanged,
+      signOut,
+      setPersistence,
+      browserLocalPersistence
     } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, doc, setDoc, getDoc, addDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
     // Live Firebase Configuration (secret-christmas-letter)
     const LIVE_FIREBASE_CONFIG = {
@@ -1069,6 +1103,10 @@
     let db = null;
     let auth = null;
     let ribbonTimers = [];
+    let mailboxUnsubscribe = null;
+    let rosterUnsubscribe = null;
+    let claimsUnsubscribe = null;
+    let registrationInProgress = false;
 
     // Safe localStorage helpers
     function loadLocalState() {
@@ -1076,14 +1114,6 @@
         const savedRoster = JSON.parse(localStorage.getItem(STORAGE_KEYS.roster) || 'null');
         if (Array.isArray(savedRoster) && savedRoster.length > 0) {
           state.roster = savedRoster;
-        }
-        const savedLetters = JSON.parse(localStorage.getItem(STORAGE_KEYS.letters) || '[]');
-        if (Array.isArray(savedLetters)) {
-          state.letters = savedLetters;
-        }
-        const savedClaims = JSON.parse(localStorage.getItem(STORAGE_KEYS.claims) || '{}');
-        if (savedClaims && typeof savedClaims === 'object') {
-          state.claims = savedClaims;
         }
         const savedOpened = JSON.parse(localStorage.getItem(STORAGE_KEYS.opened) || '[]');
         if (Array.isArray(savedOpened)) {
@@ -1101,8 +1131,6 @@
     function persistLocalState() {
       try {
         localStorage.setItem(STORAGE_KEYS.roster, JSON.stringify(state.roster));
-        localStorage.setItem(STORAGE_KEYS.letters, JSON.stringify(state.letters));
-        localStorage.setItem(STORAGE_KEYS.claims, JSON.stringify(state.claims));
         localStorage.setItem(STORAGE_KEYS.opened, JSON.stringify([...state.openedIds]));
         localStorage.setItem(STORAGE_KEYS.snow, String(state.snowEnabled));
       } catch (err) {
@@ -1118,24 +1146,6 @@
       return `${studentSlug(name)}@science4a.vault`;
     }
 
-    async function hashPasswordFallback(studentName, rawPassword) {
-      const normalized = `${APP_ID}::${studentName.trim().toLowerCase()}::${rawPassword}`;
-      if (window.crypto && window.crypto.subtle) {
-        const encoder = new TextEncoder();
-        const data = encoder.encode(normalized);
-        const hashBuffer = await window.crypto.subtle.digest('SHA-256', data);
-        return Array.from(new Uint8Array(hashBuffer))
-          .map((b) => b.toString(16).padStart(2, '0'))
-          .join('');
-      }
-      let hash = 0;
-      for (let i = 0; i < normalized.length; i++) {
-        hash = (hash << 5) - hash + normalized.charCodeAt(i);
-        hash |= 0;
-      }
-      return `fallback_${Math.abs(hash)}`;
-    }
-
     function escapeHtml(str) {
       return String(str || '')
         .replace(/&/g, '&amp;')
@@ -1145,93 +1155,103 @@
         .replace(/'/g, '&#39;');
     }
 
-    // Initialize Firebase Auth & Firestore Cloud Sync
+    // Secure Firebase setup. No anonymous fallback and no local-only account mode.
+    function appPath(...parts) {
+      return ['artifacts', APP_ID, 'public', 'data', ...parts];
+    }
+
+    function subscribeToPrivateMailbox(studentName) {
+      if (mailboxUnsubscribe) { mailboxUnsubscribe(); mailboxUnsubscribe = null; }
+      state.letters = [];
+      if (!db || !auth?.currentUser || !studentName) { refreshAllViews(); return; }
+      const lettersCol = collection(db, ...appPath('mailboxes', studentSlug(studentName), 'letters'));
+      mailboxUnsubscribe = onSnapshot(lettersCol, (snapshot) => {
+        state.letters = snapshot.docs.map((snap) => ({ id: snap.id, ...snap.data() }));
+        state.letters.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+        refreshAllViews();
+      }, (err) => {
+        console.error('Private mailbox could not be loaded:', err);
+        state.letters = [];
+        showToast('Your private mailbox could not be loaded. Check your connection or Firestore rules.', 'error');
+        refreshAllViews();
+      });
+    }
+
+    async function resolveSignedInOwner(user) {
+      if (registrationInProgress) return;
+      if (mailboxUnsubscribe) { mailboxUnsubscribe(); mailboxUnsubscribe = null; }
+      state.verifiedOwner = null;
+      state.letters = [];
+      if (!user || !user.email || !user.email.endsWith('@science4a.vault')) {
+        refreshAllViews();
+        if (state.vaultUnlocked) renderVaultAccountState();
+        return;
+      }
+      const slug = user.email.slice(0, -'@science4a.vault'.length);
+      const matched = state.roster.find((name) => studentSlug(name) === slug);
+      if (!matched) { await signOut(auth); return; }
+      try {
+        const claimRef = doc(db, ...appPath('claimIndex', slug));
+        const claimSnap = await getDoc(claimRef);
+        if (!claimSnap.exists() || claimSnap.data().ownerUid !== user.uid) {
+          await signOut(auth);
+          showToast('This account is not linked to the selected classmate name.', 'error');
+          return;
+        }
+        state.verifiedOwner = matched;
+        subscribeToPrivateMailbox(matched);
+        if (state.vaultUnlocked) renderVaultAccountState();
+        refreshAllViews();
+      } catch (err) {
+        console.error('Account verification failed:', err);
+        showToast('Could not verify your personal account. Please try again.', 'error');
+      }
+    }
+
     async function initCloudStorage() {
       try {
         const firebaseConfig = (typeof __firebase_config !== 'undefined' && __firebase_config)
           ? JSON.parse(__firebase_config)
           : LIVE_FIREBASE_CONFIG;
-
         const app = initializeApp(firebaseConfig);
         auth = getAuth(app);
         db = getFirestore(app);
-
-        // Keep existing personal login session across page reloads if user is signed in
-        onAuthStateChanged(auth, async (user) => {
-          if (user && user.email && user.email.endsWith('@science4a.vault')) {
-            const slug = user.email.replace('@science4a.vault', '');
-            const matched = state.roster.find((n) => studentSlug(n) === slug);
-            if (matched) {
-              state.verifiedOwner = matched;
-              refreshAllViews();
-            }
-          }
-        });
-
-        if (!auth.currentUser) {
-          if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-            await signInWithCustomToken(auth, __initial_auth_token);
-          } else {
-            await signInAnonymously(auth);
-          }
-        }
-
+        await setPersistence(auth, browserLocalPersistence);
         state.cloudReady = true;
 
-        // Listen to shared class roster
-        const rosterRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'meta', 'roster');
-        onSnapshot(rosterRef, (snap) => {
-          if (snap.exists() && Array.isArray(snap.data().names) && snap.data().names.length > 0) {
+        const rosterRef = doc(db, ...appPath('meta', 'roster'));
+        rosterUnsubscribe = onSnapshot(rosterRef, (snap) => {
+          if (snap.exists() && Array.isArray(snap.data().names) && snap.data().names.length) {
             state.roster = snap.data().names;
-            if (auth.currentUser && auth.currentUser.email && auth.currentUser.email.endsWith('@science4a.vault')) {
-              const slug = auth.currentUser.email.replace('@science4a.vault', '');
-              const matched = state.roster.find((n) => studentSlug(n) === slug);
-              if (matched) state.verifiedOwner = matched;
-            }
             persistLocalState();
             refreshAllViews();
+            if (auth.currentUser) resolveSignedInOwner(auth.currentUser);
           }
         }, (err) => {
-          console.warn('Roster listener fallback:', err.message);
-          if (err.code === 'permission-denied') state.cloudReady = false;
+          console.error('Roster listener error:', err);
+          showToast('Class roster could not sync. Check Firestore rules.', 'error');
         });
 
-        // Listen to sealed letters
-        const lettersCol = collection(db, 'artifacts', APP_ID, 'public', 'data', 'letters');
-        onSnapshot(lettersCol, (snapshot) => {
-          const cloudLetters = [];
-          snapshot.forEach((docSnap) => {
-            cloudLetters.push({ id: docSnap.id, ...docSnap.data() });
-          });
-          cloudLetters.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
-          state.letters = cloudLetters;
-          persistLocalState();
-          refreshAllViews();
-        }, (err) => {
-          console.warn('Letters listener fallback:', err.message);
-          if (err.code === 'permission-denied') state.cloudReady = false;
-        });
-
-        // Listen to permanent personal account claims
-        const claimsCol = collection(db, 'artifacts', APP_ID, 'public', 'data', 'claims');
-        onSnapshot(claimsCol, (snapshot) => {
+        // Claims contain only public ownership metadata, never passwords or password hashes.
+        const claimsCol = collection(db, ...appPath('claimIndex'));
+        claimsUnsubscribe = onSnapshot(claimsCol, (snapshot) => {
           const updatedClaims = {};
-          snapshot.forEach((docSnap) => {
-            const data = docSnap.data();
-            if (data && data.studentName) {
-              updatedClaims[data.studentName] = data;
-            }
+          snapshot.forEach((claimDoc) => {
+            const data = claimDoc.data();
+            if (data?.studentName && data?.ownerUid) updatedClaims[data.studentName] = data;
           });
           state.claims = updatedClaims;
-          persistLocalState();
           refreshAllViews();
         }, (err) => {
-          console.warn('Claims listener fallback:', err.message);
-          if (err.code === 'permission-denied') state.cloudReady = false;
+          console.error('Account roster listener error:', err);
+          showToast('Account list could not sync. Check Firestore rules.', 'error');
         });
+
+        onAuthStateChanged(auth, (user) => { resolveSignedInOwner(user); });
       } catch (err) {
-        console.warn('Running in offline/local fallback mode:', err);
+        console.error('Firebase initialization failed:', err);
         state.cloudReady = false;
+        showToast('Secure cloud service is unavailable. Sign-in and sending are disabled until it reconnects.', 'error');
       }
     }
 
@@ -1296,7 +1316,7 @@
       listEl.innerHTML = filtered
         .map((name, index) => {
           const isSelected = state.selectedRecipient === name;
-          const count = state.letters.filter((l) => l.recipient === name).length;
+          const count = '🔒';
           return `
             <button
               type="button"
@@ -1315,7 +1335,7 @@
               <span class="text-[11px] font-bold px-2 py-0.5 rounded-full shrink-0 ${
                 isSelected ? 'bg-goldLight text-pine' : 'bg-parchment text-cocoa/70 border border-gold/25'
               }">
-                ${count} 💌
+                ${count}
               </span>
             </button>
           `;
@@ -1358,65 +1378,44 @@
       });
     };
 
-    // Submit & Seal Letter
+    // Submit & Seal Letter. Each sender can create only one document per recipient.
     window.submitLetter = async function () {
       const msgEl = document.getElementById('letter-message');
       const codenameEl = document.getElementById('letter-codename');
       const sendBtn = document.getElementById('send-letter-btn');
-
-      if (!state.selectedRecipient) {
-        showToast('Pick a classmate first!', 'error');
-        return;
+      if (!state.selectedRecipient) return showToast('Pick a classmate first!', 'error');
+      if (!state.verifiedOwner || !auth?.currentUser || auth.currentUser.isAnonymous) {
+        return showToast('Please log in to your personal SCIENCE 4A account before sending.', 'error');
       }
-
-      const message = (msgEl ? msgEl.value : '').trim();
-      if (!message) {
-        showToast('Write a holiday wish before sealing!', 'error');
-        return;
-      }
-
-      const sender = (codenameEl ? codenameEl.value : '').trim() || 'Secret Elf';
+      const message = (msgEl?.value || '').trim();
+      if (!message) return showToast('Write a holiday wish before sealing!', 'error');
+      if (message.length > 1200) return showToast('Your message is too long. Please keep it under 1,200 characters.', 'error');
+      const recipient = state.selectedRecipient;
+      if (recipient === state.verifiedOwner) return showToast('Choose a classmate other than yourself.', 'error');
       const payload = {
-        recipient: state.selectedRecipient,
+        recipient,
         message,
-        sender,
+        sender: (codenameEl?.value || '').trim() || 'Secret Elf',
         theme: state.selectedTheme,
         sticker: state.selectedSticker,
         createdAt: Date.now(),
       };
-
       if (sendBtn) sendBtn.disabled = true;
-
       try {
-        if (state.cloudReady && db) {
-          const lettersCol = collection(db, 'artifacts', APP_ID, 'public', 'data', 'letters');
-          await addDoc(lettersCol, payload);
-        } else {
-          state.letters.push({ id: `local_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`, ...payload });
-          persistLocalState();
-          refreshAllViews();
-        }
-
+        if (!state.cloudReady || !db) throw new Error('Secure cloud service is not connected. Please refresh and try again.');
+        const letterRef = doc(db, ...appPath('mailboxes', studentSlug(recipient), 'letters', auth.currentUser.uid));
+        await setDoc(letterRef, payload);
         if (msgEl) msgEl.value = '';
         if (codenameEl) codenameEl.value = '';
         updateCharCount();
         launchConfettiBurst(42);
-        showToast(`Sealed & delivered to ${state.selectedRecipient}'s stocking!`);
+        showToast(`Your letter was sealed for ${recipient}!`);
       } catch (err) {
-        if (err && err.code === 'permission-denied') {
-          state.cloudReady = false;
-          state.letters.push({ id: `local_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`, ...payload });
-          persistLocalState();
-          refreshAllViews();
-
-          if (msgEl) msgEl.value = '';
-          if (codenameEl) codenameEl.value = '';
-          updateCharCount();
-          launchConfettiBurst(42);
-          showToast('Saved locally! Check Firestore Rules to sync across devices.');
+        console.error('Error sending private letter:', err);
+        if (err.code === 'permission-denied') {
+          showToast('This letter may already have been sent, or the secure Firestore rules are not installed.', 'error');
         } else {
-          console.error('Error sending letter:', err);
-          showToast('Could not send letter. Check your connection!', 'error');
+          showToast(err.message || 'Could not send letter. Check your connection.', 'error');
         }
       } finally {
         if (sendBtn) sendBtn.disabled = false;
@@ -1526,7 +1525,7 @@
       }
     };
 
-    // Register & Permanently Bind a Personal Stocking Account
+    // Register one permanent Firebase Auth identity for the selected classmate.
     window.handlePersonalRegister = async function (event) {
       event.preventDefault();
       const selectEl = document.getElementById('register-student-select');
@@ -1534,161 +1533,89 @@
       const pass2El = document.getElementById('register-password-confirm');
       const errEl = document.getElementById('personal-register-error');
       const btnEl = document.getElementById('personal-register-btn');
-
-      const studentName = selectEl ? selectEl.value : '';
-      const pass1 = pass1El ? pass1El.value : '';
-      const pass2 = pass2El ? pass2El.value : '';
-
+      const studentName = selectEl?.value || '';
+      const pass1 = pass1El?.value || '';
+      const pass2 = pass2El?.value || '';
       errEl.classList.add('hidden');
-
-      if (!studentName) {
-        errEl.textContent = 'Select an unclaimed name from the list.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-      if (state.claims[studentName]) {
-        errEl.textContent = 'This name is already claimed! Switch to Log In.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-      if (pass1.length < 6) {
-        errEl.textContent = 'Password must be at least 6 characters.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-      if (pass1 !== pass2) {
-        errEl.textContent = 'Passwords do not match!';
-        errEl.classList.remove('hidden');
-        return;
-      }
-
-      btnEl.disabled = true;
-      btnEl.textContent = 'Creating Personal Account...';
-
+      if (!state.cloudReady || !auth || !db) { errEl.textContent = 'Secure account service is unavailable. Please refresh and try again.'; errEl.classList.remove('hidden'); return; }
+      if (!studentName) { errEl.textContent = 'Select an unclaimed name from the list.'; errEl.classList.remove('hidden'); return; }
+      if (state.claims[studentName]) { errEl.textContent = 'This name is already claimed. Please log in.'; errEl.classList.remove('hidden'); return; }
+      if (pass1.length < 8) { errEl.textContent = 'Use a password with at least 8 characters.'; errEl.classList.remove('hidden'); return; }
+      if (pass1 !== pass2) { errEl.textContent = 'Passwords do not match.'; errEl.classList.remove('hidden'); return; }
+      btnEl.disabled = true; btnEl.textContent = 'Creating Personal Account...';
+      registrationInProgress = true;
       try {
         const email = studentAccountEmail(studentName);
-        let ownerUid = 'local_owner';
-
-        if (auth && db) {
-          // Double-check live Firestore before claiming so two people can never overwrite
-          const claimRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'claims', studentSlug(studentName));
-          const existingSnap = await getDoc(claimRef);
-          if (existingSnap.exists()) {
-            state.claims[studentName] = existingSnap.data();
-            persistLocalState();
-            renderVaultAccountState();
-            throw new Error('This name was already claimed! Please use Log In.');
-          }
-
-          try {
-            const cred = await createUserWithEmailAndPassword(auth, email, pass1);
-            ownerUid = cred.user.uid;
-          } catch (authErr) {
-            if (authErr.code === 'auth/email-already-in-use') {
-              throw new Error('This account already exists! Switch to Log In.');
-            }
-            if (authErr.code === 'auth/operation-not-allowed') {
-              // Fallback if Email/Password provider isn't toggled ON yet in Firebase Console
-              await signInAnonymously(auth);
-              ownerUid = auth.currentUser?.uid || 'anon_owner';
-            } else {
-              throw authErr;
-            }
-          }
-
-          const passHash = await hashPasswordFallback(studentName, pass1);
-          const claimRecord = {
-            studentName,
-            ownerUid,
-            passHash,
-            claimedAt: Date.now(),
-          };
-          await setDoc(claimRef, claimRecord);
-          state.claims[studentName] = claimRecord;
-        } else {
-          const passHash = await hashPasswordFallback(studentName, pass1);
-          state.claims[studentName] = { studentName, ownerUid, passHash, claimedAt: Date.now() };
+        let cred;
+        try {
+          cred = await createUserWithEmailAndPassword(auth, email, pass1);
+        } catch (authErr) {
+          // Repair path: if Auth was created but the Firestore claim failed earlier,
+          // let the same password finish the missing claim without allowing reassignment.
+          if (authErr.code !== 'auth/email-already-in-use') throw authErr;
+          cred = await signInWithEmailAndPassword(auth, email, pass1);
         }
-
-        persistLocalState();
+        const claimRef = doc(db, ...appPath('claimIndex', studentSlug(studentName)));
+        const existingClaim = await getDoc(claimRef);
+        if (existingClaim.exists() && existingClaim.data().ownerUid !== cred.user.uid) {
+          throw new Error('This name is permanently linked to another account.');
+        }
+        if (!existingClaim.exists()) {
+          await setDoc(claimRef, { studentName, ownerUid: cred.user.uid, claimedAt: Date.now() });
+        }
+        state.claims[studentName] = { studentName, ownerUid: cred.user.uid, claimedAt: existingClaim.exists() ? existingClaim.data().claimedAt : Date.now() };
         state.verifiedOwner = studentName;
-        pass1El.value = '';
-        pass2El.value = '';
+        if (pass1El) pass1El.value = '';
+        if (pass2El) pass2El.value = '';
+        subscribeToPrivateMailbox(studentName);
         launchConfettiBurst(60);
         renderVaultAccountState();
         showToast(`Personal stocking permanently claimed for ${studentName}!`);
       } catch (err) {
-        errEl.textContent = err.message || 'Could not register account.';
-        errEl.classList.remove('hidden');
+        console.error('Registration failed:', err);
+        let message = err.message || 'Could not register account.';
+        if (err.code === 'auth/email-already-in-use') message = 'This classmate account already exists. Please log in.';
+        if (err.code === 'auth/operation-not-allowed') message = 'Enable Email/Password sign-in in Firebase Authentication settings.';
+        if (err.code === 'permission-denied') message = 'Firebase rejected the claim. Install the updated Firestore rules, then contact the app administrator if this account was created but not claimed.';
+        errEl.textContent = message; errEl.classList.remove('hidden');
       } finally {
+        registrationInProgress = false;
         btnEl.disabled = false;
         btnEl.innerHTML = '<span>🎄</span><span>Register & Lock My Stocking</span>';
       }
     };
 
-    // Log Into an Existing Personal Stocking Account
+    // Authenticate and verify that this Firebase UID owns the selected roster name.
     window.handlePersonalLogin = async function (event) {
       event.preventDefault();
       const selectEl = document.getElementById('login-student-select');
       const passEl = document.getElementById('login-password-input');
       const errEl = document.getElementById('personal-login-error');
       const btnEl = document.getElementById('personal-login-btn');
-
-      const studentName = selectEl ? selectEl.value : '';
-      const rawPassword = passEl ? passEl.value : '';
-
+      const studentName = selectEl?.value || '';
+      const rawPassword = passEl?.value || '';
       errEl.classList.add('hidden');
-
-      if (!studentName) {
-        errEl.textContent = 'Select your name first.';
-        errEl.classList.remove('hidden');
-        return;
-      }
-
-      btnEl.disabled = true;
-      btnEl.textContent = 'Verifying Account...';
-
+      if (!auth || !db || !state.cloudReady) { errEl.textContent = 'Secure account service is unavailable. Please refresh.'; errEl.classList.remove('hidden'); return; }
+      if (!studentName) { errEl.textContent = 'Select your name first.'; errEl.classList.remove('hidden'); return; }
+      btnEl.disabled = true; btnEl.textContent = 'Verifying Account...';
       try {
-        const email = studentAccountEmail(studentName);
-        const claimData = state.claims[studentName];
-        let verified = false;
-
-        if (auth) {
-          try {
-            await signInWithEmailAndPassword(auth, email, rawPassword);
-            verified = true;
-          } catch (authErr) {
-            if (authErr.code === 'auth/wrong-password' || authErr.code === 'auth/invalid-credential') {
-              throw new Error('Incorrect personal password!');
-            }
-            // Check stored hash fallback if account was created before Email/Password provider was enabled
-            if (claimData && claimData.passHash) {
-              const checkHash = await hashPasswordFallback(studentName, rawPassword);
-              if (checkHash === claimData.passHash) {
-                verified = true;
-              }
-            }
-            if (!verified) {
-              throw new Error('Incorrect personal password!');
-            }
-          }
-        } else if (claimData && claimData.passHash) {
-          const checkHash = await hashPasswordFallback(studentName, rawPassword);
-          verified = checkHash === claimData.passHash;
+        const cred = await signInWithEmailAndPassword(auth, studentAccountEmail(studentName), rawPassword);
+        const claimRef = doc(db, ...appPath('claimIndex', studentSlug(studentName)));
+        const claimSnap = await getDoc(claimRef);
+        if (!claimSnap.exists() || claimSnap.data().ownerUid !== cred.user.uid) {
+          await signOut(auth);
+          throw new Error('This account is not permanently linked to the selected classmate name.');
         }
-
-        if (!verified) {
-          throw new Error('Incorrect personal password!');
-        }
-
         state.verifiedOwner = studentName;
-        passEl.value = '';
+        if (passEl) passEl.value = '';
+        subscribeToPrivateMailbox(studentName);
         launchConfettiBurst(55);
         renderVaultAccountState();
         showToast(`Welcome back, ${studentName}!`);
       } catch (err) {
-        errEl.textContent = err.message || 'Incorrect password!';
-        errEl.classList.remove('hidden');
+        let message = err.message || 'Incorrect password.';
+        if (err.code === 'auth/invalid-credential' || err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found') message = 'Incorrect name or personal password.';
+        errEl.textContent = message; errEl.classList.remove('hidden');
       } finally {
         btnEl.disabled = false;
         btnEl.innerHTML = '<span>🔔</span><span>Open My Personal Stocking</span>';
@@ -1698,16 +1625,16 @@
     window.exitOwnerMailbox = async function (silent = false) {
       state.verifiedOwner = null;
       state.activeReaderList = [];
-      if (auth) {
-        try {
-          await signInAnonymously(auth);
-        } catch (e) {
-          console.warn('Re-auth anonymous skipped:', e);
-        }
-      }
+      state.letters = [];
+      if (mailboxUnsubscribe) { mailboxUnsubscribe(); mailboxUnsubscribe = null; }
+      try { if (auth?.currentUser) await signOut(auth); }
+      catch (err) { console.error('Sign out failed:', err); }
       renderVaultAccountState();
-      if (!silent) showToast('Signed out of your personal stocking.');
+      refreshAllViews();
+      if (!silent) showToast('You have securely signed out of your personal stocking.');
     };
+
+    function mailboxLetterKey(letter) { return `${studentSlug(letter.recipient)}_${letter.id}`; }
 
     // Render Only the Authenticated Owner's Envelopes
     function renderOwnerMailbox() {
@@ -1736,7 +1663,7 @@
 
       grid.innerHTML = myLetters
         .map((letter, idx) => {
-          const isOpened = state.openedIds.has(letter.id);
+          const isOpened = state.openedIds.has(mailboxLetterKey(letter));
           const themeClass = `stationery-${letter.theme || 'pine'}`;
           return `
             <div
@@ -1804,7 +1731,7 @@
 
     window.openAllEnvelopesForStudent = function () {
       if (!state.activeReaderList.length) return;
-      state.activeReaderList.forEach((l) => state.openedIds.add(l.id));
+      state.activeReaderList.forEach((l) => state.openedIds.add(mailboxLetterKey(l)));
       persistLocalState();
       launchConfettiBurst(60);
       renderOwnerMailbox();
@@ -1817,7 +1744,7 @@
       if (!letter) return;
 
       state.activeReaderIndex = index;
-      state.openedIds.add(letter.id);
+      state.openedIds.add(mailboxLetterKey(letter));
       persistLocalState();
 
       const modal = document.getElementById('letter-reader-modal');
@@ -1923,72 +1850,25 @@
     window.saveClassRoster = async function () {
       const textarea = document.getElementById('roster-textarea');
       if (!textarea) return;
-
-      const names = [...new Set(
-        textarea.value
-          .split('\n')
-          .map((s) => s.trim())
-          .filter(Boolean)
-      )];
-
-      if (names.length === 0) {
-        showToast('Enter at least one classmate name!', 'error');
-        return;
+      const names = [...new Set(textarea.value.split('\n').map((name) => name.trim()).filter(Boolean))];
+      if (names.length === 0) return showToast('Enter at least one classmate name!', 'error');
+      if (!state.cloudReady || !db) return showToast('The secure cloud service is unavailable. Roster changes were not saved.', 'error');
+      try {
+        const rosterRef = doc(db, ...appPath('meta', 'roster'));
+        await setDoc(rosterRef, { names, updatedAt: Date.now() });
+        state.roster = names;
+        persistLocalState();
+        closeRosterModal();
+        refreshAllViews();
+        showToast(`Saved ${names.length} SCIENCE 4A classmates!`);
+      } catch (err) {
+        console.error('Roster update rejected:', err);
+        showToast('Roster editing is admin-only. Update it in Firebase Console or assign this account the admin custom claim.', 'error');
       }
-
-      state.roster = names;
-      persistLocalState();
-
-      if (state.cloudReady && db) {
-        try {
-          const rosterRef = doc(db, 'artifacts', APP_ID, 'public', 'data', 'meta', 'roster');
-          await setDoc(rosterRef, { names, updatedAt: Date.now() });
-        } catch (err) {
-          console.warn('Cloud roster sync warning:', err);
-        }
-      }
-
-      closeRosterModal();
-      refreshAllViews();
-      showToast(`Saved ${names.length} SCIENCE 4A classmates!`);
     };
 
     window.generateSampleBatch = async function () {
-      const targetStudent = state.roster[0] || 'Classmate #01';
-      const themes = ['pine', 'cranberry', 'gold', 'peppermint'];
-      const stickers = ['🎄', '🦌', '🍬', '🔔', '🎅', '❄️'];
-      const wishes = [
-        'Merry Christmas! Thank you for making SCIENCE 4A such a fun and memorable class this year!',
-        'Wishing you warmth, joy, and tons of holiday treats this Christmas break!',
-        'So grateful to have you as a classmate in SCIENCE 4A. Have the happiest holidays!',
-        'May your Christmas sparkle with laughter, good health, and great memories!',
-      ];
-
-      const batch = Array.from({ length: 52 }, (_, i) => ({
-        recipient: targetStudent,
-        message: wishes[i % wishes.length],
-        sender: `Secret Classmate #${i + 1}`,
-        theme: themes[i % themes.length],
-        sticker: stickers[i % stickers.length],
-        createdAt: Date.now() + i,
-      }));
-
-      if (state.cloudReady && db) {
-        const lettersCol = collection(db, 'artifacts', APP_ID, 'public', 'data', 'letters');
-        for (const item of batch) {
-          await addDoc(lettersCol, item);
-        }
-      } else {
-        batch.forEach((item, idx) => {
-          state.letters.push({ id: `sample_${Date.now()}_${idx}`, ...item });
-        });
-        persistLocalState();
-        refreshAllViews();
-      }
-
-      closeRosterModal();
-      launchConfettiBurst(65);
-      showToast(`Added 52 sample letters for ${targetStudent}!`);
+      showToast('Sample letters are disabled so demo data cannot bypass private-mailbox and one-letter protections.', 'error');
     };
 
     // Festive Header Bell & Snow Toggle
